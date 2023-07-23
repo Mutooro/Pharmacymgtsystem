@@ -237,7 +237,7 @@ window.onload=startclock;
         </div>
       <i class="icon-calendar icon-large"></i>
                 <?php
-                $Today = date('y:m:d',mktime());
+                $Today = date('y:m:d',mktime(12, 0, 0, 7, 23, 2023));
                 $new = date('l, F d, Y', strtotime($Today));
                 echo $new;
                 ?><br><br>
