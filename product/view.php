@@ -46,7 +46,7 @@
         <span class="icon-bar"></span>
           </a>
 
-          <a class="brand" href="#"><b>Simple Pharmacy System</b></a>
+          <a class="brand" href="#"><b>ASK Pharmacy</b></a>
         <div class="nav-collapse">
             <ul class="nav pull-right">
                

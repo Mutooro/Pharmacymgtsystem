@@ -1,4 +1,4 @@
-<!-- For more projects: Visit codeastro.com  -->
+
 <?php
 
 session_start();
@@ -54,7 +54,7 @@ if(!isset($_SESSION['user_session'])){
 				<th>Total </th>
     	  	</tr>
 			  </thead>
-			<!-- For more projects: Visit codeastro.com  -->
+			
     	    <?php
     	   include("dbcon.php");
            $date = date('d-m-Y');    
@@ -77,4 +77,4 @@ if(!isset($_SESSION['user_session'])){
     </div>  
 
 </body>
-</html><!-- For more projects: Visit codeastro.com  -->
+</html>

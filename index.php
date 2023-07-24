@@ -1,4 +1,4 @@
-<!-- For more projects: Visit codeastro.com  -->
+
 <?php
 error_reporting(1);
 session_start();
@@ -68,7 +68,7 @@ if(isset($_SESSION['user_session'])){
 <!DOCTYPE html>
 <html>
 <head>
-<!-- For more projects: Visit codeastro.com  -->
+
 	<title>SPMS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
@@ -82,16 +82,16 @@ if(isset($_SESSION['user_session'])){
 <body>
 
 	<center>
-		<h1>Simple Pharmacy Management System</h1>
+		<h1>ASK Wholesale Pharmacy</h1>
 	</center>
 
 	<div class="content" style="width: 400px">
 
 		<form method="POST">
-
+    <?php echo $error_msg;?>
 		<table class="table table-bordered table-responsive " >
 			<tr>
-			  <td><label for="username">Usename</label></td>
+			  <td><label for="username">Username</label></td>
 			  <td><input type="text" autocomplete="off" name="username" class="form-group" required></td>
 			</tr>
 			<tr>
@@ -105,7 +105,7 @@ if(isset($_SESSION['user_session'])){
 
 		<input type="submit" name="submit" class="btn btn-success btn-large" value="Login">
 
-    <?php echo $error_msg;?>
+    
 
 	</form>
 
@@ -116,4 +116,3 @@ if(isset($_SESSION['user_session'])){
  
 </body>
 </html>
-<!-- For more projects: Visit codeastro.com  -->

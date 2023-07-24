@@ -1,4 +1,4 @@
-<!-- For more projects: Visit codeastro.com  -->
+
 <?php
 include "dbcon.php";
 require "fpdf.php";
@@ -211,4 +211,4 @@ $qty = implode(",", $quantity);
 }
 
 ?>
-<!-- For more projects: Visit codeastro.com  -->
+
