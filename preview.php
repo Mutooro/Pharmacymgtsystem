@@ -47,7 +47,7 @@ if(!isset($_SESSION['user_session'])){
 
     <div id="content">
 
-	<center><div style="font:bold 25px 'Arial';">Simple Pharmacy System</div><br>
+	<center><div style="font:bold 25px 'Arial';">Ask Pharmacy</div><br>
                        
 	</center><br><br>
 
@@ -61,7 +61,7 @@ if(!isset($_SESSION['user_session'])){
   <form method="POST" action="save_invoice.php">
   	<table class="table table-bordered table-hover" border="1" cellpadding="4" cellspacing="0" style="font-family: arial; font-size: 12px;text-align:left;" width="100%">
       <tr>
-       <strong><h3>Invoice Number:<?php echo $invoice_number?></h3></strong> 
+       <strong><h3>Receipt Number:<?php echo $invoice_number?></h3></strong> 
         <?php echo $date?>
       </tr>
 		<thead>
@@ -132,7 +132,7 @@ if(!isset($_SESSION['user_session'])){
           <td colspan="2"><strong style="font-size: 12px;">
           <?php
 
-          echo '<h3>'.'$'.$paid_amount.'</h3>';
+          echo '<h3>'.'ugx.'.$paid_amount.'</h3>';
 
 
           ?>
@@ -144,7 +144,7 @@ if(!isset($_SESSION['user_session'])){
           <td colspan="2"><strong style="font-size: 12px;">
           <?php
 
-          echo '<h3>'.'$'.($paid_amount - $amount).'</h3>';
+          echo '<h3>'.'ugx.'.($paid_amount - $amount).'</h3>';
           
           ?>
           </strong></td>
@@ -161,5 +161,8 @@ if(!isset($_SESSION['user_session'])){
   <a href="javascript:Clickheretoprint()" class="btn btn-danger btn-md" style="float: right;"><i class="icon icon-print"></i> Print</a>
 
   </form>
+  
+
   </body>
   </html><!-- For more projects: Visit codeastro.com  -->
+ 

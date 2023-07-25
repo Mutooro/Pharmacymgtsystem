@@ -14,7 +14,7 @@
   	  	  <table id="table" style="width: 400px; margin: auto;overflow-x:auto; overflow-y: auto;">
   	  	 <tr>
          <td>Bar Code:</td>
-         <td><input type="text" name="bar_code" id="bar_code" size="10" placeholder="Set a bar code"></td>
+         <td><input type="text" name="bar_code" id="bar_code" size="10" placeholder="Set a bar code" required></td>
           </tr>
           <tr id="row1">
          <td>Medicine Name:</td>

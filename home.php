@@ -20,6 +20,7 @@ if(!isset($_SESSION['user_session'])){  //User_session
     <link rel="stylesheet" href="css/jquery.css">
   <link rel="stylesheet" type="text/css" href="src/facebox.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style type="text/css">
 
   </style>
@@ -104,20 +105,47 @@ if(timerRunning)
 clearTimeout(timerID);
 timerRunning = false;
 }
-function showtime () {
-var now = new Date();
-var hours = now.getHours();
-var minutes = now.getMinutes();
-var seconds = now.getSeconds()
-var timeValue = "" + ((hours >12) ? hours -12 :hours)
-if (timeValue == "0") timeValue = 12;
-timeValue += ((minutes < 10) ? ":0" : ":") + minutes
-timeValue += ((seconds < 10) ? ":0" : ":") + seconds
-timeValue += (hours >= 12) ? " P.M." : " A.M."
-document.clock.face.value = timeValue;
-timerID = setTimeout("showtime()",1000);
-timerRunning = true;
+// function showtime () {
+// var now = new Date();
+// var hours = now.getHours();
+// var minutes = now.getMinutes();
+// var seconds = now.getSeconds()
+// var timeValue = "" + ((hours >12) ? hours -12 :hours)
+// if (timeValue == "0") timeValue = 12;
+// timeValue += ((minutes < 10) ? ":0" : ":") + minutes
+// timeValue += ((seconds < 10) ? ":0" : ":") + seconds
+// timeValue += (hours >= 12) ? " P.M." : " A.M."
+// document.clock.face.value = timeValue;
+// timerID = setTimeout("showtime()",1000);
+// timerRunning = true;
+// }
+function showtime() {
+  // Get the current date and time
+  var now = new Date();
+  
+  // Extract hours, minutes, and seconds from the current time
+  var hours = now.getHours();
+  var minutes = now.getMinutes();
+  var seconds = now.getSeconds();
+  
+  // Add leading zeros if needed to ensure two-digit format
+  var formattedHours = (hours < 10 ? "0" : "") + hours;
+  var formattedMinutes = (minutes < 10 ? "0" : "") + minutes;
+  var formattedSeconds = (seconds < 10 ? "0" : "") + seconds;
+  
+  // Construct the time string in 24-hour clock format (HH:mm:ss)
+  var timeValue = formattedHours + ":" + formattedMinutes + ":" + formattedSeconds;
+  
+  // Display the timeValue in the specified input field (assuming there is an input field with the name 'face')
+  document.clock.face.value = timeValue;
+  
+  // Set a timer to call the showtime() function again after 1000 milliseconds (1 second)
+  timerID = setTimeout(showtime, 1000);
+  
+  // Indicate that the timer is running
+  timerRunning = true;
 }
+
 function startclock() {
 stopclock();
 showtime();
@@ -142,7 +170,7 @@ window.onload=startclock;
         <span class="icon-bar"></span>
           </a>
 
-          <a class="brand" href="#"><b>Simple Pharmacy System</b></a>
+          <a class="brand" href="#"><b>Ask Pharmacy</b></a>
            <div class="nav-collapse">
 
             <ul class="nav pull-right">
@@ -201,6 +229,7 @@ window.onload=startclock;
          <li><a href="product/view.php?invoice_number=<?php echo $_GET['invoice_number']?>"><span class="icon-th"></span> Products</a></li>
           <li><a href="sales_report.php?invoice_number=<?php echo $_GET['invoice_number']?>"><span class="icon-bar-chart"></span> Sales Report</a></li>   
          <li><a href="backup.php?invoice_number=<?php echo $_GET['invoice_number']?>"><span class="icon-folder-open"></span> Backup</a></li>
+         <li><a href="changepass.php" id="popup"><span class="fa fa-user" aria-hidden="true"></span></a></li>
          <li><a href="logout.php" class="link"><font color='red'><span class="icon-off"></span></font> Logout</a></li>
        </ul>
          </div>
@@ -226,7 +255,7 @@ window.onload=startclock;
   
                     while($row = mysqli_fetch_array($select_query)){
   
-                               echo '$'.$row['sum(total_amount)'];
+                               echo 'shs.'.$row['sum(total_amount)'];
   
   
                     }
@@ -376,7 +405,7 @@ window.onload=startclock;
       
                   $grand_total = $row['sum(amount)'];
                   $grand_profit =$row['sum(profit_amount)'];
-                  echo '$'.$grand_total;
+                  echo 'ugx.'.$grand_total;
                 }
                 ?>
               </td>

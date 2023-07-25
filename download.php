@@ -1,4 +1,4 @@
-<!-- For more projects: Visit codeastro.com  -->
+
 <?php
 
 session_start();

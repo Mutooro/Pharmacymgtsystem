@@ -56,7 +56,7 @@
 </head>
 <body>
   <body style="height: 100%">
-  <div class="navbar navbar-inverse navbar-fixed-top"><!--*****Header******-->
+  <div class="navbar navbar-inverse navbar-fixed-top" ><!--*****Header******-->
       <div class="navbar-inner">
         <div class="container-fluid">
 
@@ -66,7 +66,7 @@
         <span class="icon-bar"></span>
           </a>
 
-          <a class="brand" href="#"><b>Simple Pharmacy System</b></a>
+          <a class="brand" href="#"><b>Ask Pharmacy </b></a>
 
           <div class="nav-collapse">
             <ul class="nav pull-right">
@@ -155,7 +155,7 @@
   
   <center>
     <div class="alert alert-info" role="alert">
-      <small><b>Info:</b> All the downloaded invoices are stored inside the directory " <b>C:/invoices/</b> "</small>
+      <small><b>Info:</b> All the downloaded recipts are stored inside the directory " <b>C:/invoices/</b> "</small>
     </div>
   <!-- For more projects: Visit codeastro.com  -->
   </center>
@@ -168,7 +168,7 @@
        <thead>
        <tr style="background-color: #383838; color: #FFFFFF;" >
               <th>Date</th>
-              <th>Invoice No.</th>
+              <th>Receipt No.</th>
              <th>Medicines</th>
              <th>Qty (Type)</th>
               <th>Total Amount</th>
@@ -219,7 +219,7 @@
   
                   while($row = mysqli_fetch_array($select_query)){
   
-                     echo '$'.$row['sum(total_amount)'];
+                     echo 'ugx.'.$row['sum(total_amount)'];
   
                 }
   
@@ -234,7 +234,7 @@
   
                   while($row = mysqli_fetch_array($select_query)){
   
-                     echo '$'.$row['sum(total_profit)'];
+                     echo 'ugx.'.$row['sum(total_profit)'];
                 }
                   ?>
                             <?php }else{
@@ -280,7 +280,7 @@
   
                   while($row = mysqli_fetch_array($select_query)){
   
-                     echo '$'.$row['sum(total_amount)'];
+                     echo 'shs.'.$row['sum(total_amount)'];
   
                 }
   
@@ -295,7 +295,7 @@
   
                   while($row = mysqli_fetch_array($select_query)){
   
-                     echo '$'.$row['sum(total_profit)'];
+                     echo 'shs.'.$row['sum(total_profit)'];
                 }
                   ?>
   
@@ -303,8 +303,9 @@
                 </th>
   
         </table>
-  
-     </div>
+       
+        
+      </div>
     </div>
   </div>
   </body>

@@ -22,21 +22,27 @@ class myPDF extends FPDF{
 
 
     $this->SetFont('Arial','B',20);
-    $this->Cell(276,10,'Simple Pharmacy Invoice',0,0,'C');
+    $this->Cell(276,10,'Ask Pharmacy',0,0,'C');
     $this->Ln(20);
-    $this->Cell(80,40,'Invoice Number:'.$invoice_number,0,0,'C');
+    $this->Cell(80,40,'Receipt Number:'.$invoice_number,0,0,'C');
     $this->Ln();
     $this->Cell(50,-10,$date,0,0,'C');
     $this->Ln(10);
     
   }
 
-  function footer(){
+  function footer() {
+    // Get the current date and time
+    $printDate = date('Y-m-d H:i:s');
 
-        $this->Cell(276,10,'Thank You',0,0,'C');
-        $this->Ln(20);
+    $this->SetFont('Arial', '', 10);
 
-  }
+    // Output the footer
+    $this->Cell(276, 10, 'Thank You', 0, 1, 'C');
+    $this->Cell(276, 10, 'Print Date: ' . $printDate, 0, 0, 'C');
+    $this->Ln(20);
+}
+
 
   function headerTable(){
 
@@ -44,7 +50,7 @@ class myPDF extends FPDF{
     $this->Cell(40,10,'Product Name',1,0,'C');
     $this->Cell(40,10,'Category',1,0,'C');
     $this->Cell(40,10,'Qty',1,0,'C');
-    $this->Cell(50,10,'Price',1,0,'C');
+    $this->Cell(50,10,'Unit Price',1,0,'C');
     $this->Cell(100,10,'Amount',1,0,'C');
     $this->Ln();
   }

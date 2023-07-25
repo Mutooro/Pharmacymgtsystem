@@ -319,8 +319,8 @@ $(".delete").click(function(){//***Showing Alert When Deleting*****
   var del_id = element.attr("id");
 
   var info = 'id='+del_id;
-
-  if(confirm("Delte This Product!!Are You Sure??")){
+ 
+  if(confirm("Delete This Product!! Are You Sure??")){
 
     $.ajax({
 
