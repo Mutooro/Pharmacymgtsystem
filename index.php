@@ -1,118 +1,120 @@
-
 <?php
-error_reporting(1);
 session_start();
 include("dbcon.php");
-if(isset($_SESSION['user_session'])){
-  
-  $invoice_number="CA-".invoice_number();
-	header("location:home.php?invoice_number=$invoice_number");
+$message="";
+
+if (isset($_SESSION['user_session'])) {
+  $invoice_number = "CA-" . invoice_number();
+  header("location: home.php?invoice_number=$invoice_number");
 }
 
-   if(isset($_POST['submit'])){  //******Login Form*******
-  $username =$_POST['username'];
-
+if (isset($_POST['submit'])) {
+  $username = $_POST['username'];
   $password = $_POST['password'];
+  $position = $_POST['position'];
 
-  $password = sha1($password);
+  switch ($position) {
+    case 'Admin':
+      $result = mysqli_query($con, "SELECT admin_id, username FROM admin WHERE username='$username' AND password='$password'");
+      $row = mysqli_fetch_array($result);
+      if ($row > 0) {
+        session_start();
+        $_SESSION['admin_id'] = $row[0];
+        $_SESSION['username'] = $row[1];
+        $invoice_number = "CA-" . invoice_number(); // Generate random invoice number
+        header("location: home.php?invoice_number=$invoice_number");
+      } else {
+        $message = "<font color=red>Invalid login Try Again </font>";
+      }
+      break;
 
-  $select_sql = "SELECT * FROM users ";
-
-  $select_query = mysqli_query($con,$select_sql);
-   
-  if($select_query){
-
-  	while ($row =mysqli_fetch_array($select_query)) {
-  		$s_username = $row['user_name'];
-  		$s_password = $row['password'];
-  	}
+      case 'Pharmacist':
+        $result = mysqli_query($con, "SELECT pharmacist_id, first_name, last_name, staff_id, username FROM pharmacist WHERE username='$username' AND password='$password'");
+        $row = mysqli_fetch_array($result);
+        if ($row > 0) {
+          session_start();
+          $_SESSION['pharmacist_id'] = $row[0];
+          $_SESSION['first_name'] = $row[1];
+          $_SESSION['last_name'] = $row[2];
+          $_SESSION['staff_id'] = $row[3];
+          $_SESSION['username'] = $row[4];
+          $invoice_number = "CA-" . invoice_number(); // Generate random invoice number
+          $_SESSION['user_session'] = 'pharmacist'; // Set user_session for pharmacist
+          header("location: home.php?invoice_number=$invoice_number");
+        } else {
+          $message = "<font color=red>Invalid login Try Again</font>";
+        }
+        break;
   }
+}
 
- if($s_username == $username && $s_password == $password){
-          
-         $_SESSION['user_session'] = $s_username;
-         $invoice_number="CA-".invoice_number();
- 	       header("location:home.php?invoice_number=$invoice_number");
+// Function to generate random invoice number
+function invoice_number()
+{
+  $chars = "09302909209300923";
+  srand((double)microtime() * 1000000);
+  $i = 1;
+  $pass = '';
+  while ($i <= 7) {
+    $num = rand() % 10;
+    $tmp = substr($chars, $num, 1);
+    $pass = $pass . $tmp;
+    $i++;
+  }
+  return $pass;
+}
 
 
- }else{
- 	  	    $error_msg = "<center><font color='red'>Login Failed</font></center>";
- }
 
-}                  //******Login Form*******
-
-  function invoice_number(){   //********Outputting Random Number For Invoice Number********
-
-    $chars = "09302909209300923";
-
-    srand((double)microtime()*1000000);
-
-    $i = 1;
-
-    $pass = '';
-
-    while($i <=7){
-
-      $num  = rand()%10;
-      $tmp  = substr($chars, $num,1);
-      $pass = $pass.$tmp;
-      $i++;
-    }
-    return $pass;
-                        //********Outputting Random Number For Invoice Number********
-  }                       
-?>
-
+echo <<<LOGIN
 <!DOCTYPE html>
 <html>
-<!DOCTYPE html>
-<html>
+
+
+
 <head>
+<title>My Pharmacy</title>
 
-	<title>SPMS</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
-    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    
+
+
 </head>
-<body>
+<body background="images/bng.jpg">
+<div id="content">
+<div id="header">
+<h1>My Pharmacy </h1>
+</div>
+<div id="main">
 
-	<center>
-		<h1>ASK Wholesale Pharmacy</h1>
-	</center>
-
-	<div class="content" style="width: 400px">
-
-		<form method="POST">
-    <?php echo $error_msg;?>
-		<table class="table table-bordered table-responsive " >
-			<tr>
-			  <td><label for="username">Username</label></td>
-			  <td><input type="text" autocomplete="off" name="username" class="form-group" required></td>
-			</tr>
-			<tr>
-				<td><label for="password">Password</label></td>
-				<td><input type="password" name="password" required></td>
-			</tr>
-      <input type="hidden" aucomplete="off" name="invoice_number" value="<?php echo 'CA-'.invoice_number()?>">
-
-		</table>
-    
-
-		<input type="submit" name="submit" class="btn btn-success btn-large" value="Login">
-
-    
-
-	</form>
-
-		
-  </div>
-  
-  
  
+  <form method="post" action="index.php">
+    <div class="vid-container">
+
+    <div class="inner-container">
+      <img class="bgvid inner"        src="images/bng.jpg"
+      />
+      <div class="box">
+        <h1>Login</h1>
+        <input type="text" name="username" value="" placeholder="Username"/>
+        <input type="password" name="password" value="" placeholder="Password"/>
+        <center>		<p><select name="position"> </center>
+        		<option>--Select position--</option>
+        			<option>Admin</option>
+        			<option>Pharmacist</option>
+        			</select></p>
+              <button type="submit" name="submit" value="Login">Login</button>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+
+</div>
 </body>
+
 </html>
+LOGIN;
+?>
+<!-- Your HTML code goes here -->
