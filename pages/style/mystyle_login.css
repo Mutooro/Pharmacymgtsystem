@@ -30,32 +30,20 @@ margin-right: 50px;
 margin-left: 50px;
 color: #fff;
 }
-#header  img {float:left; height: 90px; width: 150px;}
-#left_column {
-float: left;
-width: 200px;
-height: 470px;
-background: #00CED1;
-border-right:solid 2px blue;
-}
+
 #main {
 width: 560px;
 height: 100%;
 
 }
-#main  img { height: 120px; width: 320px;}
-#footer{
-width: 760px;
-height: 55px;
-background: #00CED1;
-clear: all;
-border-top: solid 2px blue;
-}
+
 
 .container {
   margin: 0 auto;
   width: 670px;
+  
 }
+
 
 .login {
   position: relative;
@@ -241,6 +229,7 @@ body{
   color:#fff;
   background:rgba(0,0,0,0.13);
   padding:30px 0px;
+
 }
 .box h1{
   text-align:center;

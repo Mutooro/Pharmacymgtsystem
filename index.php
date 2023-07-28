@@ -22,7 +22,8 @@ if (isset($_POST['submit'])) {
         $_SESSION['admin_id'] = $row[0];
         $_SESSION['username'] = $row[1];
         $invoice_number = "CA-" . invoice_number(); // Generate random invoice number
-        header("location: home.php?invoice_number=$invoice_number");
+        
+        header("location: pages/admin_dashboard.php");
       } else {
         $message = "<font color=red>Invalid login Try Again </font>";
       }
@@ -74,11 +75,22 @@ echo <<<LOGIN
 
 <head>
 <title>My Pharmacy</title>
+<link rel="stylesheet" type="text/css" href="pages/style/mystyle_login.css">
 
+<style>
+#content {
+    width: 100%;
+height: 100%;
+}
+#main{
+  width: 100%;
+height: 100%;
+}
 
+</style>
 
 </head>
-<body background="images/bng.jpg">
+<body>
 <div id="content">
 <div id="header">
 <h1>My Pharmacy </h1>
@@ -90,8 +102,7 @@ echo <<<LOGIN
     <div class="vid-container">
 
     <div class="inner-container">
-      <img class="bgvid inner"        src="images/bng.jpg"
-      />
+      
       <div class="box">
         <h1>Login</h1>
         <input type="text" name="username" value="" placeholder="Username"/>

@@ -31,10 +31,13 @@ height: 550px;
 <div id="content">
 <div id="header">
 <h1> My Pharmacy</h1></div> 
+<?php
+
+?>
 <div id="left_column">
 <div id="button">
 <ul>
-			<li><a href="admin.php">Dashboard</a></li>
+			<li><a href="sales_repot.php">Dashboard</a></li>
 			<li><a href="admin_pharmacist.php">Pharmacist</a></li>
 			<li><a href="admin_manager.php">Manager</a></li>
 			<li><a href="admin_cashier.php">Cashier</a></li>
@@ -46,24 +49,15 @@ height: 550px;
 
  <!-- Dashboard icons -->
             <div class="grid_7">
-            	<a href="admin.php" class="dashboard-module">
+            	<a href="../sales_report.php" class="dashboard-module">
                 	<img src="images/dashboard(1).png" width="75" height="75" alt="edit" />
                 	<span>Dashboard</span>
                 </a>
-                <a href="admin_pharmacist.php" class="dashboard-module">
+                <a href="../sales_report.php" class="dashboard-module">
                 	<img src="images/pharmacist.png"  width="75" height="75" alt="edit" />
                 	<span>Pharmacist</span>
                 </a>
 
-                <a href="admin_manager.php" class="dashboard-module">
-                	<img src="images/admin.png"  width="75" height="75" alt="edit" />
-                	<span>Manager</span>
-                </a>
-
-                <a href="admin_cashier.php" class="dashboard-module">
-                	<img src="images/cashier.png" width="75" height="75" alt="edit" />
-                	<span>Cashier</span>
-                </a>
 			</div>
 </div>
 
