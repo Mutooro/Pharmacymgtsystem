@@ -12,7 +12,7 @@ if(!isset($_SESSION['user_session'])){  //User_session
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SPMS</title>
+  <title>Ask Pharmacy || home</title>
    <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
@@ -22,6 +22,56 @@ if(!isset($_SESSION['user_session'])){  //User_session
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style type="text/css">
+/* Add this CSS to style the dropdown menu */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  display: block;
+  padding: 8px 14px;
+  color: #333;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.dropdown-menu li {
+  display: block;
+  padding: 8px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: #333;
+  white-space: nowrap;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f5f5f5;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
 
   </style>
     
@@ -105,20 +155,7 @@ if(timerRunning)
 clearTimeout(timerID);
 timerRunning = false;
 }
-// function showtime () {
-// var now = new Date();
-// var hours = now.getHours();
-// var minutes = now.getMinutes();
-// var seconds = now.getSeconds()
-// var timeValue = "" + ((hours >12) ? hours -12 :hours)
-// if (timeValue == "0") timeValue = 12;
-// timeValue += ((minutes < 10) ? ":0" : ":") + minutes
-// timeValue += ((seconds < 10) ? ":0" : ":") + seconds
-// timeValue += (hours >= 12) ? " P.M." : " A.M."
-// document.clock.face.value = timeValue;
-// timerID = setTimeout("showtime()",1000);
-// timerRunning = true;
-// }
+
 function showtime() {
   // Get the current date and time
   var now = new Date();
@@ -164,7 +201,7 @@ window.onload=startclock;
       <div class=" navbar-inner">
         <div class="container-fluid">
 
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".`nav-collapse`">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -229,8 +266,17 @@ window.onload=startclock;
          <li><a href="product/view.php?invoice_number=<?php echo $_GET['invoice_number']?>"><span class="icon-th"></span> Products</a></li>
           <li><a href="sales_report.php?invoice_number=<?php echo $_GET['invoice_number']?>"><span class="icon-bar-chart"></span> Sales Report</a></li>   
          <li><a href="backup.php?invoice_number=<?php echo $_GET['invoice_number']?>"><span class="icon-folder-open"></span> Backup</a></li>
-         <li><a href="changepass.php" id="popup"><span class="fa fa-user" aria-hidden="true"></span></a></li>
-         <li><a href="logout.php" class="link"><font color='red'><span class="icon-off"></span></font> Logout</a></li>
+         <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <span class="fa fa-user" aria-hidden="true"> <?php echo $_SESSION['first_name']?></span>
+        <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="changepass.php">Change Password</a></li>
+        <!-- Add more dropdown links here if needed -->
+        <li><a href="logout.php"><font color='red'><span class="icon-off"></span></font> Logout</a></li>
+      </ul>
+    </li>
        </ul>
          </div>
         </div>
@@ -273,7 +319,7 @@ window.onload=startclock;
      
 
      <form name="clock" method="POST" action="#"><!--*****Clock******-->
-     <input style="width:150px;background: #000;color: #fff;border-radius: 5px;height: 30px;" readonly type="submit" class="trans" name="face" value="">
+     <input style="width:150px;background: green;color: #fff;border-radius: 5px;height: 30px;" readonly type="submit" class="trans" name="face" value="">
       </form><!--*****Clock******-->
 
       

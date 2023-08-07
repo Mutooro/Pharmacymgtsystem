@@ -23,6 +23,8 @@ if (isset($_POST['submit'])) {
         $_SESSION['username'] = $row[1];
         $invoice_number = "CA-" . invoice_number(); // Generate random invoice number
         
+    $_SESSION['user_session'] = 'admin'; // Set user_session for admin
+        
         header("location: pages/admin_dashboard.php");
       } else {
         $message = "<font color=red>Invalid login Try Again </font>";

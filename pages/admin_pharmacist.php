@@ -106,10 +106,9 @@ return false;
 <div id="left_column">
 <div id="button">
 		<ul>
-			<li><a href="admin.php">Dashboard</a></li>
+			<li><a href="admin_dashboard.php">Dashboard</a></li>
 			<li><a href="admin_pharmacist.php">Pharmacist</a></li>
-			<li><a href="admin_manager.php">Manager</a></li>
-			<li><a href="admin_cashier.php">Cashier</a></li>
+			
 			<li><a href="../logout.php">Logout</a></li>
 		</ul>
 </div>

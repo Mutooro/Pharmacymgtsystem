@@ -37,10 +37,9 @@ height: 550px;
 <div id="left_column">
 <div id="button">
 <ul>
-			<li><a href="sales_repot.php">Dashboard</a></li>
+			<li><a href="../sales_report.php">Dashboard</a></li>
 			<li><a href="admin_pharmacist.php">Pharmacist</a></li>
-			<li><a href="admin_manager.php">Manager</a></li>
-			<li><a href="admin_cashier.php">Cashier</a></li>
+			
 			<li><a href="../logout.php">Logout</a></li>
 		</ul>
 </div>
@@ -53,7 +52,7 @@ height: 550px;
                 	<img src="images/dashboard(1).png" width="75" height="75" alt="edit" />
                 	<span>Dashboard</span>
                 </a>
-                <a href="../sales_report.php" class="dashboard-module">
+                <a href="admin_pharmacist.php" class="dashboard-module">
                 	<img src="images/pharmacist.png"  width="75" height="75" alt="edit" />
                 	<span>Pharmacist</span>
                 </a>
