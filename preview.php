@@ -38,6 +38,14 @@ if(!isset($_SESSION['user_session'])){
 
       
     </script>
+    <style>
+  @media print {
+    .table-print {
+      font-size: 10px; /* Adjust as needed */
+    }
+  }
+</style>
+
 </head>
 <body>
 
@@ -46,10 +54,10 @@ if(!isset($_SESSION['user_session'])){
   	<a href="home.php?invoice_number=<?php echo $_GET['invoice_number']?>"><button class="btn btn-default"><i class="icon-arrow-left"></i> Back to Sales</button></a>
 
     <div id="content">
-
-	<center><div style="font:bold 25px 'Arial';">Ask Pharmacy</div><br>
+<br>
+	<div style="font:bold 25px 'Arial';">Ask Pharmacy</div>
                        
-	</center><br><br>
+	<br>
 
 	<?php 
   
@@ -59,7 +67,7 @@ if(!isset($_SESSION['user_session'])){
 	?>
 
   <form method="POST" action="save_invoice.php">
-  	<table class="table table-bordered table-hover" border="1" cellpadding="4" cellspacing="0" style="font-family: arial; font-size: 12px;text-align:left;" width="100%">
+  <table class="table table-bordered table-hover table-print" border="1" cellpadding="4" cellspacing="0" style="font-family: arial; font-size: 12px; text-align: left; width: 50%;">
       <tr>
        <strong><h3>Receipt Number:<?php echo $invoice_number?></h3></strong> 
         <?php echo $date?>
@@ -128,7 +136,7 @@ if(!isset($_SESSION['user_session'])){
         </tr>
 
          <tr>
-          <td colspan="4" style=" text-align:right;"><strong style="font-size: 12px;">Paid Amount: &nbsp;</strong></td>
+          <td colspan="4" style=" text-align:left;"><strong style="font-size: 12px;">Paid Amount: &nbsp;</strong></td>
           <td colspan="2"><strong style="font-size: 12px;">
           <?php
 
@@ -140,7 +148,7 @@ if(!isset($_SESSION['user_session'])){
         </tr>
        
          <tr>
-          <td colspan="4" style=" text-align:right;"><strong style="font-size: 18px;">&nbsp;&nbsp;Change Amount: &nbsp;</strong></td>
+          <td colspan="4" style=" text-align:left;"><strong style="font-size: 18px;">&nbsp;&nbsp;Change Amount: &nbsp;</strong></td>
           <td colspan="2"><strong style="font-size: 12px;">
           <?php
 
@@ -158,7 +166,7 @@ if(!isset($_SESSION['user_session'])){
   <input type="hidden" name="invoice_number" value="<?php echo $invoice_number?>">
   <input type="hidden" name="date" value="<?php echo $date?>">
   <input type="submit" name="submit" class="btn btn-success btn-large" value="Submit and Make new Sales" >
-  <a href="javascript:Clickheretoprint()" class="btn btn-danger btn-md" style="float: right;"><i class="icon icon-print"></i> Print</a>
+  <a href="javascript:Clickheretoprint()" class="btn btn-danger btn-md"><i class="icon icon-print"></i> Print</a>
 
   </form>
   

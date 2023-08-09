@@ -64,7 +64,7 @@ $select_query= mysqli_query($con,$select_sql);
 
      header("location:home.php?invoice_number=$invoice_number");
   
-     // echo "<script type='text/javascript'>window.location.href = home.php?invoice_number=$invoice_number '</script>";
+     //echo "<script type='text/javascript'>window.location.href = home.php?invoice_number=$invoice_number '</script>";
 	}else{
 
 	}

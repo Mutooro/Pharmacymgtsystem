@@ -78,4 +78,3 @@ if(!isset($_SESSION['user_session'])){
    }
 
 ?>
-<!-- For more projects: Visit codeastro.com  -->

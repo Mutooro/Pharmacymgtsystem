@@ -199,7 +199,7 @@
         <?php while( $row =  mysqli_fetch_array($result)) : ?>
         <!-- For more projects: Visit codeastro.com  -->
   
-        <tr style="">
+        <tr >
             <!--Each table column is echoed in to a td cell-->
             <td><?php echo $row['bar_code']; ?></td>
             <td><?php echo $row['medicine_name']; ?></td>

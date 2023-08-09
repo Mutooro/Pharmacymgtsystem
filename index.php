@@ -15,41 +15,40 @@ if (isset($_POST['submit'])) {
 
   switch ($position) {
     case 'Admin':
-      $result = mysqli_query($con, "SELECT admin_id, username FROM admin WHERE username='$username' AND password='$password'");
+      $result = mysqli_query($con, "SELECT admin_id, username, password FROM admin WHERE username='$username'");
       $row = mysqli_fetch_array($result);
-      if ($row > 0) {
+      if ($row && password_verify($password, $row['password'])) {
         session_start();
-        $_SESSION['admin_id'] = $row[0];
-        $_SESSION['username'] = $row[1];
-        $invoice_number = "CA-" . invoice_number(); // Generate random invoice number
-        
-    $_SESSION['user_session'] = 'admin'; // Set user_session for admin
-        
-        header("location: pages/admin_dashboard.php");
+        $_SESSION['admin_id'] = $row['admin_id'];
+        $_SESSION['username'] = $row['username'];
+        $invoice_number = "CA-" . invoice_number();
+        $_SESSION['user_session'] = 'admin';
+        header("location: pages/salesAdmin.php?invoice_number=$invoice_number");
       } else {
-        $message = "<font color=red>Invalid login Try Again </font>";
+        $message = "<center><font color=red>Invalid login Try Again</font></center>";
       }
       break;
 
-      case 'Pharmacist':
-        $result = mysqli_query($con, "SELECT pharmacist_id, first_name, last_name, staff_id, username FROM pharmacist WHERE username='$username' AND password='$password'");
-        $row = mysqli_fetch_array($result);
-        if ($row > 0) {
-          session_start();
-          $_SESSION['pharmacist_id'] = $row[0];
-          $_SESSION['first_name'] = $row[1];
-          $_SESSION['last_name'] = $row[2];
-          $_SESSION['staff_id'] = $row[3];
-          $_SESSION['username'] = $row[4];
-          $invoice_number = "CA-" . invoice_number(); // Generate random invoice number
-          $_SESSION['user_session'] = 'pharmacist'; // Set user_session for pharmacist
-          header("location: home.php?invoice_number=$invoice_number");
-        } else {
-          $message = "<font color=red>Invalid login Try Again</font>";
-        }
-        break;
+    case 'Pharmacist':
+      $result = mysqli_query($con, "SELECT pharmacist_id, first_name, last_name, staff_id, username, password FROM pharmacist WHERE username='$username'");
+      $row = mysqli_fetch_array($result);
+      if ($row && password_verify($password, $row['password'])) {
+        session_start();
+        $_SESSION['pharmacist_id'] = $row['pharmacist_id'];
+        $_SESSION['first_name'] = $row['first_name'];
+        $_SESSION['last_name'] = $row['last_name'];
+        $_SESSION['staff_id'] = $row['staff_id'];
+        $_SESSION['username'] = $row['username'];
+        $invoice_number = "CA-" . invoice_number();
+        $_SESSION['user_session'] = 'pharmacist';
+        header("location: home.php?invoice_number=$invoice_number");
+      } else {
+        $message = "<center><font color=red>Invalid login Try Again</font></center>";
+      }
+      break;
   }
 }
+
 
 // Function to generate random invoice number
 function invoice_number()
@@ -70,64 +69,94 @@ function invoice_number()
 
 
 echo <<<LOGIN
+
+
+<!-- Your HTML code goes here -->
+
+
 <!DOCTYPE html>
 <html>
-
-
-
 <head>
-<title>My Pharmacy</title>
-<link rel="stylesheet" type="text/css" href="pages/style/mystyle_login.css">
-
-<style>
-#content {
-    width: 100%;
-height: 100%;
-}
-#main{
-  width: 100%;
-height: 100%;
-}
-
-</style>
-
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        body {
+            background-color: #f1f1f1;
+        }
+        
+        .reset-password {
+            max-width: 300px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            
+        }
+        
+        
+        .reset-password h1 {
+            text-align: center;
+        }
+        
+        .reset-password form {
+            display: flex;
+            flex-direction: column;
+          
+        }
+        
+        .reset-password label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .reset-password label i {
+            margin-right: 10px;
+        }
+        
+        .reset-password input[type="text"],
+        .reset-password input[type="password"] {
+            padding: 10px;
+        }
+        
+        .reset-password input[type="submit"] {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-<div id="content">
-<div id="header">
-<h1>My Pharmacy </h1>
-</div>
-<div id="main">
-
- 
-  <form method="post" action="index.php">
-    <div class="vid-container">
-
-    <div class="inner-container">
-      
-      <div class="box">
+    <div class="reset-password">
         <h1>Login</h1>
-        <input type="text" name="username" value="" placeholder="Username"/>
-        <input type="password" name="password" value="" placeholder="Password"/>
-        <center>		<p><select name="position"> </center>
-        		<option>--Select position--</option>
+        $message
+        <form action="" method="post">
+            <label for="username">
+                <i class="fas fa-user"></i>
+                <input type="text" name="username" placeholder="Username" id="username" required>
+            </label>
+            <label for="password">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" placeholder="Password" id="password" required>
+            </label>
+           
+            <label for="role">
+                <i class="fas fa-users"></i>
+                <select name="position" id="role" required>
+                <option>--Select position--</option>
         			<option>Admin</option>
         			<option>Pharmacist</option>
-        			</select></p>
-              <button type="submit" name="submit" value="Login">Login</button>
-
-
-      </div>
+                </select>
+            </label>
+            <input type="submit" value="Login" name="submit">
+        </form>
+        
     </div>
-  </div>
-</div>
-</form>
-
-
-</div>
 </body>
-
 </html>
 LOGIN;
 ?>
-<!-- Your HTML code goes here -->

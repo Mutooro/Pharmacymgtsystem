@@ -19,28 +19,39 @@ $phone=$_POST['phone'];
 $email=$_POST['email'];
 $user=$_POST['username'];
 $pas=$_POST['password'];
+$hashed_password = password_hash($pas, PASSWORD_DEFAULT);
 $sql1=mysqli_query($con, "SELECT * FROM pharmacist WHERE username='$user'")or die(mysqli_error());
  $result=mysqli_fetch_array($sql1);
 if($result>0){
 $message="<font color=blue>sorry the username entered already exists</font>";
  }else{
 $sql=mysqli_query($con, "INSERT INTO pharmacist(first_name,last_name,staff_id,postal_address,phone,email,username,password,date)
-VALUES('$fname','$lname','$sid','$postal','$phone','$email','$user','$pas',NOW())");
+VALUES('$fname','$lname','$sid','$postal','$phone','$email','$user','$hashed_password',NOW())");
 if($sql>0) {header("location:http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/admin_pharmacist.php");
 }else{
 $message1="<font color=red>Registration Failed, Try again</font>";
 }
 	}}
 ?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title><?php echo $username;?>My pharmacy</title>
-<link rel="stylesheet" type="text/css" href="style/mystyle.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><?php echo $username;?>My pharmacy</title>
+  <!-- Link to Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style/mystyle.css">
+  <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
 <link rel="stylesheet" href="style/style.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="style/table.css" type="text/css" media="screen" />
 <script src="js/function.js" type="text/javascript"></script>
-<script>
+<!-- <script src="js/validation_script.js" type="text/javascript"></script> -->
+  <!-- Link to Bootstrap JS (Optional, needed for certain features) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
 function validateForm()
 {
 
@@ -89,6 +100,20 @@ alert("Name Field is Empty");
 return false;
 }
 
+if(document.form1.password.value=="")
+{
+alert("Password Field is Empty ");
+document.form1.password.focus();
+return false;
+}
+	
+if(document.form1.password.length<6)
+{
+alert("Password must be atleast 6 characters long");
+document.form1.password.focus();
+return false;
+}
+
 }
 
 </script>
@@ -99,22 +124,39 @@ return false;
  #main {height: 550px;}
 </style>
 </head>
-<body >
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Ask Pharmacy  </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto"> <!-- Added ml-auto class here -->
+     
+        <li class="nav-item ">
+          <a class="nav-link" href="salesAdmin.php"><span class="icon-home"></span> Home </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#"><span class="icon-user"></span> Users <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="adminProducts.php"><span class="icon-th"></span> Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../logout.php"><font color='red'><span class="icon-off"></span></font>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Your page content here -->
 <div id="content">
 <div id="header">
 <h1>My Pharmacy</h1></div>
-<div id="left_column">
-<div id="button">
-		<ul>
-			<li><a href="admin_dashboard.php">Dashboard</a></li>
-			<li><a href="admin_pharmacist.php">Pharmacist</a></li>
-			
-			<li><a href="../logout.php">Logout</a></li>
-		</ul>
-</div>
-</div>
+
 <div id="main">
-<div id="tabbed_box" class="tabbed_box">
+<div id="tabbed_box" class="tabbed_box"><br>
     <h4>Manage Pharmacist</h4>
 <hr/>
     <div class="tabbed_area">

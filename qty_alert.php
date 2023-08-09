@@ -81,4 +81,3 @@ function med_name() {//***Search For Medicine *****
 
 </body>
 </html>
-<!-- For more projects: Visit codeastro.com  -->

@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
 	// You should execute the SQL query here using mysqli_query()
   
 	if ($sql) {
-	  header("location:http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/admin.php");
+	  header("location:http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/admin_pharmacist.php");
 	} else {
 	  $message1 = "<font color=red>Update Failed, Try again</font>";
 	}
@@ -36,34 +36,57 @@ if (isset($_POST['submit'])) {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'My Pharmacy'; ?>- My Pharmacy</title>
-
-<link rel="stylesheet" type="text/css" href="style/mystyle.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'My Pharmacy'; ?>- My Pharmacy</title>
+  <!-- Link to Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Link to Bootstrap JS (Optional, needed for certain features) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="style/mystyle.css">
 <link rel="stylesheet" href="style/style.css" type="text/css" media="screen" />
 <script src="js/function.js" type="text/javascript"></script>
+
+
 <style>#left-column {height: 550px;}
 #main {height: 550px;}</style>
 </head>
 <body>
-<div id="content">
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Ask Pharmacy</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto"> <!-- Added ml-auto class here -->
+        <li class="nav-item ">
+          <a class="nav-link" href="admin_dashboard.php">Home </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Users <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Your page content here -->
+  <div id="content">
   <div id="header">
     <h1>My Pharmacy</h1>
   </div>
-  <div id="left_column">
-    <div id="button">
-      <ul>
-        <li><a href="admin.php">Dashboard</a></li>
-        <li><a href="admin_pharmacist.php">Pharmacist</a></li>
-        <li><a href="admin_manager.php">Manager</a></li>
-        <li><a href="admin_cashier.php">Cashier</a></li>
-        <li><a href="logout.php">Logout</a></li>
-      </ul>
-    </div>
-  </div>
+  
   <div id="main">
-    <div id="tabbed_box" class="tabbed_box">
+    <div id="tabbed_box" class="tabbed_box"><br>
       <h4>Manage Users</h4>
       <hr/>
       <div class="tabbed_area">
@@ -72,7 +95,7 @@ if (isset($_POST['submit'])) {
         </ul>
         <div id="content_1" class="content">
           <?php echo $message1; ?>
-          <form name="myform" onsubmit="return validateForm(this);" action="admin_pharmacist.php" method="post">
+          <form name="myform" onsubmit="return validateForm(this);" action="" method="post">
             <table width="420" height="106" border="0">
               <tr>
                 <td align="center"><input name="first_name" type="text" style="width:170px" placeholder="First Name" value="<?php echo isset($_GET['first_name']) ? $_GET['first_name'] : ''; ?>" id="first_name" /></td>
@@ -94,5 +117,6 @@ if (isset($_POST['submit'])) {
     </div>
   </div>
 </div>
+
 </body>
 </html>

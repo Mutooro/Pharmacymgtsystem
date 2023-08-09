@@ -10,8 +10,7 @@ if(!isset($_SESSION['user_session'])){
 }
    @$drug_result=mysqli_real_escape_string($con,$_POST['drug_result']);
 
-   $query="SELECT * from stock where medicine_name LIKE'%".$drug_result."%' and status= 'Available'
-   ";
+   $query="SELECT * from stock where medicine_name LIKE'%".$drug_result."%' and status= 'Available'";
 
    $result =mysqli_query($con,$query);
 

@@ -37,11 +37,16 @@ class myPDF extends FPDF{
 
     $this->SetFont('Arial', '', 10);
 
+    // Get the printed by value from the session
+    $printedBy = isset($_SESSION['username']) ? $_SESSION['username'] : 'Unknown User';
+
     // Output the footer
     $this->Cell(276, 10, 'Thank You', 0, 1, 'C');
+    $this->Cell(276, 10, 'Printed By: ' . $printedBy, 0, 1, 'C'); // Changed the line
     $this->Cell(276, 10, 'Print Date: ' . $printDate, 0, 0, 'C');
     $this->Ln(20);
 }
+
 
 
   function headerTable(){

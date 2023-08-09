@@ -73,6 +73,7 @@ if(!isset($_SESSION['user_session'])){  //User_session
   display: block;
 }
 
+
   </style>
     
     <script src="js/jquery-1.7.2.min.js"></script>
@@ -196,7 +197,7 @@ window.onload=startclock;
 
 </head>
 <body>
- <div class="navbar navbar-inverse navbar-fixed-top"><!--*****Header******-->
+ <div class="navbar navbar-inverse navbar-fixed-top "><!--*****Header******-->
 
       <div class=" navbar-inner">
         <div class="container-fluid">
@@ -272,7 +273,7 @@ window.onload=startclock;
         <b class="caret"></b>
       </a>
       <ul class="dropdown-menu">
-        <li><a href="changepass.php">Change Password</a></li>
+        <li><a href="changepass.php" id="popup">Change Password</a></li>
         <!-- Add more dropdown links here if needed -->
         <li><a href="logout.php"><font color='red'><span class="icon-off"></span></font> Logout</a></li>
       </ul>
@@ -319,7 +320,7 @@ window.onload=startclock;
      
 
      <form name="clock" method="POST" action="#"><!--*****Clock******-->
-     <input style="width:150px;background: green;color: #fff;border-radius: 5px;height: 30px;" readonly type="submit" class="trans" name="face" value="">
+     <input style="width:150px;background: #000;color: #fff;border-radius: 5px;height: 30px;" readonly type="submit" class="trans" name="face" value="">
       </form><!--*****Clock******-->
 
       
