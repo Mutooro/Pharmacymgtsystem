@@ -18,6 +18,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo $username;?> - My Pharmacy</title>
+  <link rel="icon" href="oip-p.jpg" type="image/png" sizes="70x70">
   <!-- Link to Bootstrap CSS -->
   <!-- Add this in the <head> section of your HTML file -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -56,7 +57,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#" style="color:#FFFFFF;">Ask Pharmacy</a>
+      <a class="navbar-brand" href="#" style="color:#FFFFFF;">Ask Pharmacy Limited</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapse">
       <ul class="nav navbar-nav navbar-right">

@@ -13,6 +13,7 @@
 <html>
 <head>
  <title>Sales Report- Ask</title>
+ <link rel="icon" href="oip-p.jpg" type="image/png" sizes="70x70">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -27,8 +28,8 @@
     <script type="text/javascript">
       jQuery(document).ready(function($) {
     $("a[id*=popup]").facebox({
-      loadingImage : 'src/img/loading.gif',
-      closeImage   : 'src/img/closelabel.png'
+      loadingImage : '../src/img/loading.gif',
+      closeImage   : '../src/img/closelabel.png'
     })
   }) 
     </script>
@@ -111,12 +112,12 @@ window.onload=startclock;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#" style="color:#FFFFFF;">Ask Pharmacy</a>
+      <a class="navbar-brand" href="#" style="color:#FFFFFF;">Ask Pharmacy Limited</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
         <li class="active">
-          <a href="admin_dashboard.php"><span class="icon-home"></span> Home <span class="sr-only">(current)</span></a>
+          <a href="salesAdmin.php"><span class="icon-home"></span> Home <span class="sr-only">(current)</span></a>
         </li>
         <li>
           <a href="admin_pharmacist.php"><span class="icon-user"></span> Users</a>
@@ -124,9 +125,17 @@ window.onload=startclock;
         <li >
           <a href="adminProducts.php"><span class="icon-th"></span> Products  </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../logout.php"><font color='red'><span class="icon-off"></span></font> Logout</a>
-        </li>
+        <li class="dropdown active" >
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color: blue;" >
+        Hi, <?php echo $_SESSION['username']?></span>
+        <b class="caret"></b>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href="adminChange.php" id="popup"><font color='green'><span class="icon-key"></span></font> Change Password</a></li>
+        <li><a href="admin_add.php"><font color='green'><span class="icon-user"></span></font> Add Admin</a></li>
+        <li><a href="../logout.php"><font color='red'><span class="icon-off"></span></font> Logout</a></li>
+      </ul>
+    </li>
       </ul>
     </div>
   </div>
@@ -138,7 +147,7 @@ window.onload=startclock;
         <div class="col-md-6">
             <form name="clock" method="POST" action="#">
                 <!--*****Clock******-->
-                <input style="width:150px;background: #000;color: #fff;border-radius: 5px;height: 30px;"
+                <input style="width:150px;background: #098;color: #fff;border-radius: 5px;height: 30px;"
                        readonly type="submit" class="trans" name="face" value="">
             </form>
             <!--*****Clock******-->
@@ -146,16 +155,17 @@ window.onload=startclock;
         <div class="col-md-6 text-right">
             <font>Today's Sales:</font>
             <strong>
-                <?php
-                include("../dbcon.php");
-                $date = date("Y-m-d");
-                $select_sql = "SELECT sum(total_amount) from sales where Date = '$date'";
-                $select_query = mysqli_query($con, $select_sql);
-                while ($row = mysqli_fetch_array($select_query)) {
-                    echo 'shs.' . $row['sum(total_amount)'];
-                }
-                ?>
-            </strong>
+    <?php
+    include("../dbcon.php");
+    $date = date("Y-m-d");
+    $select_sql = "SELECT SUM(total_amount) AS total_sales FROM sales WHERE Date = '$date'";
+    $select_query = mysqli_query($con, $select_sql);
+    $row = mysqli_fetch_assoc($select_query);
+    $total_sales = $row['total_sales'];
+    echo 'shs.' . $total_sales;
+    ?>
+</strong>
+
         </div>
         <div class="clearfix"></div> <!-- Clear the float to ensure proper alignment -->
         <div class="col-md-12">
@@ -179,21 +189,54 @@ window.onload=startclock;
         <h2>Sales Report</h2>
   
       </div><br>
+  <!--display sample report of all sales made by every user-->
+
+  <?php
+include("../dbcon.php");
+
+// Retrieve summary of sales by user session
+$summary_sql = "SELECT user_session, SUM(total_amount) AS total_sales FROM sales where Date='$date' GROUP BY user_session";
+$summary_query = mysqli_query($con, $summary_sql);
+?>
+
+<div style="display: flex; align-items: center;">
+    <table class="table table-bordered table-striped table-hover" style="max-width: 300px; margin-right: 10px;">
+        <!-- ... Your table content ... -->
+        <thead>
+        <tr>
+            <th>User</th>
+            <th>Total Sales&nbsp;&nbsp;(<font size='2' color='#009688;'>Today</font>)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        while ($row = mysqli_fetch_assoc($summary_query)) {
+            $user_session = $row['user_session'];
+            $total_sales = $row['total_sales'];
+            echo "<tr>";
+            echo "<td>$user_session</td>";
+            echo "<td>shs.$total_sales</td>";
+            echo "</tr>";
+        }
+        ?>
+    </tbody>
+
+    </table>
+
+    <form action="salesAdmin.php" method="POST">
+        <strong>From : 
+            <input type="date" style="width: 223px; padding: 14px;" name="d1" class="tcal" autocomplete="off" value="" />
+            To: 
+            <input type="date" style="width: 223px; padding: 14px;" name="d2" autocomplete="off" class="tcal" value="" />
+            <button class="btn btn-info" style="width: 123px; height: 50px; margin-top: -8px; margin-left: 8px;" type="submit" name="submit">
+                <i class="icon icon-search icon-large"></i> Search
+            </button>
+        </strong>
+    </form>
+</div>
+
   
-  
-   <center> <form action="salesAdmin.php" method="POST">
-  <strong>From : <input type="date" style="width: 223px; padding:14px;" name="d1" class="tcal" autocomplete="off" value="" /> To: <input type="date" style="width: 223px; padding:14px;" name="d2" autocomplete="off" class="tcal" value="" />
-   <button class="btn btn-info" style="width: 123px; height:50px; margin-top:-8px;margin-left:8px;" type="submit" name="submit"><i class="icon icon-search icon-large"></i> Search</button>
-  </strong>
-  </form></center>
-  
-  <center>
-    <div class="alert alert-info" role="alert">
-      <small><b>Info:</b> All the downloaded recipts are stored inside the directory " <b>C:/invoices/</b> "</small>
-    </div>
-  <!-- For more projects: Visit codeastro.com  -->
-  </center>
-  
+
               <div style="overflow-x:auto; overflow-y: auto;">
   
   
@@ -205,6 +248,7 @@ window.onload=startclock;
               <th>Receipt No.</th>
              <th>Medicines</th>
              <th>Qty (Type)</th>
+             <!-- <th>User Session</th> -->
               <th>Total Amount</th>
               <th>Total Profit</th>  
               <th>Action</th>
@@ -233,9 +277,13 @@ window.onload=startclock;
             
               <td><?php echo $row['medicines']?></td>
               <td><?php echo $row['quantity']?></td>
+              <!-- <td><?php
+                    $user_session = $row['user_session']; // Assuming the user session is stored in 'user_session' column
+                    echo $user_session;
+                ?></td> -->
               <td><?php echo $row['total_amount']?></td>
               <td><?php echo $row['total_profit']?></td>
-                  <td><a href="../download.php?invoice_number=<?php echo $invoice_number?>"><button class="btn btn-success btn-md"><span class="icon-download-alt"></span> Download</button></a>
+                  <td><a href="dwn.php?invoice_number=<?php echo $invoice_number?>"><button class="btn btn-success btn-md"><span class="icon-download-alt"></span> Download</button></a>
                </td>
   
                                        <?php endwhile;?>
@@ -295,17 +343,18 @@ window.onload=startclock;
 
             <td><?php echo $row['total_amount'] ?></td>
             <td><?php echo $row['total_profit'] ?></td>
-            <td><a href="download.php?invoice_number=<?php echo $invoice_number ?>"><button
+            <td><a  href="dwn.php?invoice_number=<?php echo $invoice_number?>"><button
                             class="btn btn-success btn-md"><span class="icon-download-alt"></span> Download</button></a>
             </td>
         </tr>
         </tbody>
         <?php
     endwhile;
-}
+
 ?>
-  
-             <th colspan="4">Total:</th>
+</tr>
+</tbody>
+<th colspan="4">Total:</th>
                 <th>
                   <?php
   
@@ -334,8 +383,9 @@ window.onload=startclock;
                 }
                   ?>
   
-                            <?php  ?>
+                            <?php }?>
                 </th>
+  
   
         </table>
        
@@ -345,4 +395,6 @@ window.onload=startclock;
   </div>
   </body>
 </html>
+
+
 

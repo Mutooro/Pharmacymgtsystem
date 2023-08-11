@@ -3,36 +3,46 @@ session_start();
 include_once('../dbcon.php');
 $message = "";
 $message1 = "";
+
 if(isset($_SESSION['username'])){
-$id=$_SESSION['admin_id'];
-$username=$_SESSION['username'];
-}else{
-header("location:http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/index.php");
-exit();
+    $id = $_SESSION['admin_id'];
+    $username = $_SESSION['username'];
+} else {
+    header("location:http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/index.php");
+    exit();
 }
+
 if(isset($_POST['submit'])){
-$fname=$_POST['first_name'];
-$lname=$_POST['last_name'];
-$sid=$_POST['staff_id'];
-$postal=$_POST['postal_address'];
-$phone=$_POST['phone'];
-$email=$_POST['email'];
-$user=$_POST['username'];
-$pas=$_POST['password'];
-$hashed_password = password_hash($pas, PASSWORD_DEFAULT);
-$sql1=mysqli_query($con, "SELECT * FROM pharmacist WHERE username='$user'")or die(mysqli_error());
- $result=mysqli_fetch_array($sql1);
-if($result>0){
-$message="<font color=blue>sorry the username entered already exists</font>";
- }else{
-$sql=mysqli_query($con, "INSERT INTO pharmacist(first_name,last_name,staff_id,postal_address,phone,email,username,password,date)
-VALUES('$fname','$lname','$sid','$postal','$phone','$email','$user','$hashed_password',NOW())");
-if($sql>0) {header("location:http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF'])."/admin_pharmacist.php");
-}else{
-$message1="<font color=red>Registration Failed, Try again</font>";
+    $fname = $_POST['first_name'];
+    $lname = $_POST['last_name'];
+    $sid = $_POST['staff_id'];
+    $postal = $_POST['postal_address'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $user = $_POST['username'];
+    $pas = $_POST['password'];
+    $gender = $_POST['gender']; // New gender field
+    $role = $_POST['role']; // New role field
+    $hashed_password = password_hash($pas, PASSWORD_DEFAULT);
+
+    $sql1 = mysqli_query($con, "SELECT * FROM pharmacist WHERE username='$user'") or die(mysqli_error($con));
+    $result = mysqli_fetch_array($sql1);
+
+    if($result > 0) {
+        $message = "<font color='blue'>Sorry, the username entered already exists</font>";
+    } else {
+        $sql = mysqli_query($con, "INSERT INTO pharmacist(first_name, last_name, staff_id, postal_address, phone, email, username, password, gender, role, date)
+                VALUES('$fname', '$lname', '$sid', '$postal', '$phone', '$email', '$user', '$hashed_password', '$gender', '$role', NOW())");
+
+        if($sql > 0) {
+            header("location:http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/admin_pharmacist.php");
+        } else {
+            $message1 = "<font color='red'>Registration Failed, Try again</font>";
+        }
+    }
 }
-	}}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +50,7 @@ $message1="<font color=red>Registration Failed, Try again</font>";
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo $username;?>My pharmacy</title>
+  <link rel="icon" href="oip-p.jpg" type="image/png" sizes="70x70">
   <!-- Link to Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="style/mystyle.css">
@@ -127,7 +138,8 @@ return false;
 <body>
   <!-- Navigation Bar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">Ask Pharmacy  </a>
+    <a class="navbar-brand" href="#">Ask Pharmacy Limited </a>
+    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -177,20 +189,25 @@ return false;
         // connect to the database
         include_once('../dbcon.php');
        // get results from database
-       $result = mysqli_query($con, "SELECT * FROM pharmacist")or die(mysqli_error());
+       $result = mysqli_query($con, "SELECT * FROM pharmacist")or die(mysqli_error($con));
 		// display data in table
         echo "<table border='1' cellpadding='5'align='center'>";
-        echo "<tr> <th>ID</th><th>Firstname </th> <th>Lastname </th> <th>Username </th><th>Update </th><th>Delete</th></tr>";
+        echo "<tr> <th>Firstname </th> <th>Lastname </th><th>Gender </th><th>Designation </th><th>Phone </th><th>Address </th><th>Username </th><th>Delete</th></tr>";
         // loop through results of database query, displaying them in the table
         while($row = mysqli_fetch_array( $result )) {
                 // echo out the contents of each row into a table
                 echo "<tr>";
-                echo '<td>' . $row['pharmacist_id'] . '</td>';
+               
                 echo '<td>' . $row['first_name'] . '</td>';
 				echo '<td>' . $row['last_name'] . '</td>';
+        echo '<td>' . $row['gender'] . '</td>';
+        echo '<td>' . $row['role'] . '</td>';
+        echo '<td>' . $row['phone'] . '</td>';
+
+        echo '<td>' . $row['postal_address'] . '</td>';
 				echo '<td>' . $row['username'] . '</td>';
 				?>
-				<td><a href="update_pharmacist.php?username=<?php echo $row['username']?>"><img src="images/update-icon.png" width="35" height="35" border="0" /></a></td>
+				<!-- <td><a href="update_pharmacist.php?username=<?php echo $row['username']?>"><img src="images/update-icon.png" width="35" height="35" border="0" /></a></td> -->
 				<td><a href="delete_pharmacist.php?pharmacist_id=<?php echo $row['pharmacist_id']?>"><img src="images/delete-icon.jpg" width="35" height="35" border="0" /></a></td>
 				<?php
 		 }
@@ -203,19 +220,37 @@ return false;
 				   <?php echo $message;
 			  echo $message1;
 			  ?>
-		<form name="form1" onsubmit="return validateForm(this);" action="admin_pharmacist.php" method="post" >
-			<table width="220" height="106" border="0" >
-				<tr><td align="center"><input name="first_name" type="text" style="width:170px" placeholder="First Name" required="required" id="first_name" /></td></tr>
-				<tr><td align="center"><input name="last_name" type="text" style="width:170px" placeholder="Last Name" required="required" id="last_name" /></td></tr>
-				<tr><td align="center"><input name="staff_id" type="text" style="width:170px" placeholder="Staff ID" required="required" id="staff_id"/></td></tr>
-				<tr><td align="center"><input name="postal_address" type="text" style="width:170px" placeholder="Address" required="required" id="postal_address" /></td></tr>
-				<tr><td align="center"><input name="phone" type="text" style="width:170px"placeholder="Phone"  required="required" id="phone" /></td></tr>
-				<tr><td align="center"><input name="email" type="email" style="width:170px" placeholder="Email" required="required" id="email" /></td></tr>
-				<tr><td align="center"><input name="username" type="text" style="width:170px" placeholder="Username" required="required" id="username" /></td></tr>
-				<tr><td align="center"><input name="password" type="password" style="width:170px" placeholder="Password" required="required" id="password"/></td></tr>
-				<tr><td align="right"><input name="submit" type="submit" value="Submit"/></td></tr>
-            </table>
-		</form>
+	<form name="form1" onsubmit="return validateForm(this);" action="admin_pharmacist.php" method="post">
+    <table width="220" height="170" border="0">
+        <tr><td align="center"><input name="first_name" type="text" style="width:170px" placeholder="First Name" required="required" id="first_name" /></td></tr>
+        <tr><td align="center"><input name="last_name" type="text" style="width:170px" placeholder="Last Name" required="required" id="last_name" /></td></tr>
+        <tr><td align="center"><input name="staff_id" type="text" style="width:170px" placeholder="Staff ID" required="required" id="staff_id"/></td></tr>
+        <tr><td align="center"><input name="postal_address" type="text" style="width:170px" placeholder="Address" required="required" id="postal_address" /></td></tr>
+        <tr><td align="center"><input name="phone" type="text" style="width:170px" placeholder="Phone" required="required" id="phone" /></td></tr>
+        <tr><td align="center"><input name="email" type="email" style="width:170px" placeholder="Email" required="required" id="email" /></td></tr>
+        <tr><td align="center"><input name="username" type="text" style="width:170px" placeholder="Username" required="required" id="username" /></td></tr>
+        <tr><td align="center"><input name="password" type="password" style="width:170px" placeholder="Password" required="required" id="password"/></td></tr>
+        <tr>
+            <td align="center">
+                Gender: 
+                <label><input type="radio" name="gender" value="Male" required> Male</label>
+                <label><input type="radio" name="gender" value="Female" required> Female</label>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                Role:
+                <select name="role" required>
+                    <option value="Nurse">Nurse</option>
+                    <option value="Marketier">Marketier</option>
+                    <option value="Pharmacist">Pharmacist</option>
+                </select>
+            </td>
+        </tr>
+        <tr><td align="right"><input name="submit" type="submit" value="Submit"/></td></tr>
+    </table>
+</form>
+
         </div>
     </div>
 </div>

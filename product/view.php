@@ -8,11 +8,12 @@
 
   }
 
-?><!-- For more projects: Visit codeastro.com  -->
+?>
 <!DOCTYPE html>
 <html>
 <head>
- <title>SPMS</title>
+ <<title><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'My Pharmacy'; ?>- View Stock</title>
+  <link rel="icon" href="oip-p.jpg" type="image/png" sizes="70x70">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
@@ -46,7 +47,7 @@
         <span class="icon-bar"></span>
           </a>
 
-          <a class="brand" href="#"><b>ASK Pharmacy</b></a>
+          <a class="brand" href="#"><b>ASK Pharmacy Limited</b></a>
         <div class="nav-collapse">
             <ul class="nav pull-right">
                
@@ -146,7 +147,7 @@
             </form>
       </div>
  
-  <!-- For more projects: Visit codeastro.com  -->
+  
     </div><!---****SEARCHES_CONTENT*****--->
 
  
@@ -182,7 +183,7 @@
              <th  width="1%">Remain Qty</th>
              <th width="1%">Registered</th>
              <th style="background-color: #c53f3f;" width="1%">Expiry</th>
-             <th width="1%">Remark</th>     
+             <th width="1%">Company</th>     
              <th width="2%">Acutal Price</th>
              <th width="2%">Selling Price</th>
              <th width="2%">Profit</th>
@@ -344,4 +345,4 @@ $(".delete").click(function(){//***Showing Alert When Deleting*****
 
 
 </script>
-<!-- For more projects: Visit codeastro.com  -->
+

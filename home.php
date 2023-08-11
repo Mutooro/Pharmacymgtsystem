@@ -13,6 +13,7 @@ if(!isset($_SESSION['user_session'])){  //User_session
 <html>
 <head>
   <title>Ask Pharmacy || home</title>
+  <link rel="icon" href="images/oip-p.jpg" type="image/png" sizes="70x70">
    <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
@@ -197,52 +198,49 @@ window.onload=startclock;
 
 </head>
 <body>
- <div class="navbar navbar-inverse navbar-fixed-top "><!--*****Header******-->
+ <div class="navbar navbar-inverse navbar-fixed-top"><!-- *****Header ***** -->
 
-      <div class=" navbar-inner">
-        <div class="container-fluid">
+<div class="navbar-inner">
+  <div class="container-fluid">
 
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".`nav-collapse`">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-          </a>
+    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </a>
 
-          <a class="brand" href="#"><b>Ask Pharmacy</b></a>
-           <div class="nav-collapse">
+    <a class="brand" href="#"><b>Ask Pharmacy Limited</b></a>
+    <div class="nav-collapse collapse">
 
-            <ul class="nav pull-right">
-               
-
-
-               <li>
+      <ul class="nav pull-right">
+      <li>
 
                
-        <?php 
-        include("dbcon.php");
+<?php 
+include("dbcon.php");
 
-          $quantity = "10";
-          $select_sql1 = "SELECT * FROM stock where remain_quantity <= '$quantity' and status='Available'";
-          $result1 = mysqli_query($con,$select_sql1);
-          $row2 = $result1->num_rows;
+  $quantity = "10";
+  $select_sql1 = "SELECT * FROM stock where remain_quantity <= '$quantity' and status='Available'";
+  $result1 = mysqli_query($con,$select_sql1);
+  $row2 = $result1->num_rows;
 
-         if($row2 == 0){
+ if($row2 == 0){
 
-            echo ' <a  href="#" class="notification label-inverse" >
-                <span class="icon-exclamation-sign icon-large"></span></a>';
+    echo ' <a  href="#" class="notification label-inverse" >
+        <span class="icon-exclamation-sign icon-large"></span></a>';
 
-          }else{
-            echo ' <a  href="qty_alert.php" class="notification label-inverse" id="popup">
-                <span class="icon-exclamation-sign icon-large"></span>
-                <span class="badge">'.$row2.'</span></a>';
-
-    
-          }
+  }else{
+    echo ' <a  href="qty_alert.php" class="notification label-inverse" id="popup">
+        <span class="icon-exclamation-sign icon-large"></span>
+        <span class="badge">'.$row2.'</span></a>';
 
 
-          ?> 
-        </li>
-          <li>
+  }
+
+
+  ?> 
+</li>
+<li>
             <?php
               $date = date('d-m-Y');    
         $inc_date = date("Y-m-d", strtotime("+6 month", strtotime($date))); 
@@ -264,52 +262,47 @@ window.onload=startclock;
             ?>
             
           </li>
-         <li><a href="product/view.php?invoice_number=<?php echo $_GET['invoice_number']?>"><span class="icon-th"></span> Products</a></li>
-          <li><a href="sales_report.php?invoice_number=<?php echo $_GET['invoice_number']?>"><span class="icon-bar-chart"></span> Sales Report</a></li>   
-         <li><a href="backup.php?invoice_number=<?php echo $_GET['invoice_number']?>"><span class="icon-folder-open"></span> Backup</a></li>
-         <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        <span class="fa fa-user" aria-hidden="true"> <?php echo $_SESSION['first_name']?></span>
-        <b class="caret"></b>
-      </a>
-      <ul class="dropdown-menu">
-        <li><a href="changepass.php" id="popup">Change Password</a></li>
-        <!-- Add more dropdown links here if needed -->
-        <li><a href="logout.php"><font color='red'><span class="icon-off"></span></font> Logout</a></li>
+        <li><a href="product/view.php?invoice_number=<?php echo $_GET['invoice_number']?>"><span class="icon-th"></span> Products</a></li>
+        <li><a href="sales_report.php?invoice_number=<?php echo $_GET['invoice_number']?>"><span class="icon-bar-chart"></span> Sales Report</a></li>
+        <li><a href="backup.php?invoice_number=<?php echo $_GET['invoice_number']?>"><span class="icon-folder-open"></span> Backup</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <span class="fa fa-user" aria-hidden="true"> <?php echo $_SESSION['username']?></span>
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="changepass.php" id="popup"><font color='green'><span class="icon-key"></span></font> Change Password</a></li>
+            <!-- Add more dropdown links here if needed -->
+            <li><a href="logout.php"><font color='red'><span class="icon-off"></span></font> Logout</a></li>
+          </ul>
+        </li>
       </ul>
-    </li>
-       </ul>
-         </div>
-        </div>
-      </div>
-  </div><!--*****Header******-->
-
+    </div>
+  </div>
+</div>
+</div>
+<!--*****Header******-->
  
  <div class="container">
 
     <div class="row">
       <div class="pull-right">
         <font>Today's Sales:</font>
+                  
                   <strong><?php
-  
-                    include("dbcon.php");
-  
-                    $date = date("Y-m-d");
-  
-                    $select_sql = "SELECT sum(total_amount) from sales where Date = '$date'";
-  
-                    $select_query = mysqli_query($con,$select_sql);
-  
-                    while($row = mysqli_fetch_array($select_query)){
-  
-                               echo 'shs.'.$row['sum(total_amount)'];
-  
-  
-                    }
-  
-  
-  
-                  ?></strong>  
+include("dbcon.php");
+
+$date = date("Y-m-d");
+$user_session = $_SESSION['username']; // Replace 'user_session' with your actual session variable name
+
+$select_sql = "SELECT SUM(total_amount) FROM sales WHERE Date = '$date' AND user_session = '$user_session'";
+
+$select_query = mysqli_query($con, $select_sql);
+
+while ($row = mysqli_fetch_array($select_query)) {
+    echo 'shs.' . $row['SUM(total_amount)'];
+}
+?></strong>
         </div>
       <i class="icon-calendar icon-large"></i>
                 <?php

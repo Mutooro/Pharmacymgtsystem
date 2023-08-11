@@ -189,31 +189,30 @@ $qty = implode(",", $quantity);
 
   $remain_quantity = $row['remain_quantity'];
 
-	$select_sql = "SELECT invoice_number ,sum(amount) ,sum(profit_amount) FROM on_hold where invoice_number = '$invoice_number'";
-	$select_query  = mysqli_query($con,$select_sql);
+  $select_sql = "SELECT invoice_number ,sum(amount) ,sum(profit_amount) FROM on_hold where invoice_number = '$invoice_number'";
+  $select_query  = mysqli_query($con,$select_sql);
 
-	while ($row = mysqli_fetch_array($select_query)) {
+  while ($row = mysqli_fetch_array($select_query)) {
      $on_hold_invoice=$row['invoice_number'];
-		 $total_amount =$row['sum(amount)'];
-		  $total_profit = $row['sum(profit_amount)'];
-	}
+     $total_amount =$row['sum(amount)'];
+      $total_profit = $row['sum(profit_amount)'];
+  }
+  $user_session = $_SESSION['username'];
+  $insert_sql = "INSERT INTO sales (invoice_number, medicines, quantity, total_amount, total_profit, date,user_session) 
+  VALUES ( '$invoice_number', '$medicines', '$qty_type', '$total_amount', '$total_profit', '$date','$user_session')";
+$insert_query = mysqli_query($con, $insert_sql);
 
-  $insert_sql = "INSERT INTO sales values('','$invoice_number','$medicines','$qty_type','$total_amount','$total_profit','$date')";
-	$insert_query = mysqli_query($con,$insert_sql);
-  if($insert_query){
+if ($insert_query) {
+$update_stock = "UPDATE stock SET act_remain_quantity = '$remain_quantity' WHERE medicine_name = '$med_name' AND category = '$category' AND expire_date = '$expire_date'";
+$update_stock_query = mysqli_query($con, $update_stock);
 
-      $update_stock = "UPDATE stock SET act_remain_quantity = '$remain_quantity' where medicine_name = '$med_name' and category = '$category' and expire_date = '$expire_date'";
-
-      $update_stock_query = mysqli_query($con,$update_stock);
-
-    if($update_stock_query){
-
-      echo "Hello woer";
-    }else{
-
-      echo "Sorry";
-    }
-  }else{
+if ($update_stock_query) {
+echo "Hello world"; // Assuming this is a test message
+} else {
+echo "Sorry, stock update failed";
+}
+} 
+else{
 
     echo "slekfjs";
   }

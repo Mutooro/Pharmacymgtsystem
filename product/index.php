@@ -1,4 +1,4 @@
-<!-- For more projects: Visit codeastro.com  -->
+
 <?php
  
     session_start();
@@ -51,13 +51,13 @@
           <td><input type="date" name="exp_date" id="exp_date" size="5"  required></td>
         </tr>
         <tr>
-                   <td>Remark:</td>
+                   <td>Company:</td>
 
           <td><input type="text" name="company" id="company" size="10"></td>
         </tr>
        
           <tr>
-                     <td>Actual Price:</td>
+                     <td>Buying Price:</td>
 
           <td><input type="number" name="actual_price" id="actual_price"></td>
         </tr>
