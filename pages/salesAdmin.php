@@ -247,7 +247,7 @@ $summary_query = mysqli_query($con, $summary_sql);
               <th>Date</th>
               <th>Receipt No.</th>
              <th>Medicines</th>
-             <th>Qty (Type)</th>
+             
              <!-- <th>User Session</th> -->
               <th>Total Amount</th>
               <th>Total Profit</th>  
@@ -276,7 +276,7 @@ $summary_query = mysqli_query($con, $summary_sql);
                    ?></td>
             
               <td><?php echo $row['medicines']?></td>
-              <td><?php echo $row['quantity']?></td>
+             
               <!-- <td><?php
                     $user_session = $row['user_session']; // Assuming the user session is stored in 'user_session' column
                     echo $user_session;
@@ -339,7 +339,7 @@ $summary_query = mysqli_query($con, $summary_sql);
                 ?></td>
 
             <td><?php echo $row['medicines'] ?></td>
-            <td><?php echo $row['quantity'] ?></td>
+            
 
             <td><?php echo $row['total_amount'] ?></td>
             <td><?php echo $row['total_profit'] ?></td>

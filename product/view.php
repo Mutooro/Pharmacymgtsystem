@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <<title><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'My Pharmacy'; ?>- View Stock</title>
+ <title><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'My Pharmacy'; ?>- View Stock</title>
   <link rel="icon" href="oip-p.jpg" type="image/png" sizes="70x70">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
@@ -183,7 +183,7 @@
              <th  width="1%">Remain Qty</th>
              <th width="1%">Registered</th>
              <th style="background-color: #c53f3f;" width="1%">Expiry</th>
-             <th width="1%">Company</th>     
+             <th width="1%">Remarks</th>     
              <th width="2%">Acutal Price</th>
              <th width="2%">Selling Price</th>
              <th width="2%">Profit</th>

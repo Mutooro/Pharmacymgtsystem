@@ -55,8 +55,8 @@ if(!isset($_SESSION['user_session'])){
 
     <div id="content">
 <br>
-	<div style="font:bold 25px 'Arial';">Ask Pharmacy <br></div>
-  <h6>Nakiwala House - Kansanga Near KIU <br>  0703251153/0776283063</h6>
+	<div style="font:bold 25px 'Arial';">Ask Pharmacy Limited<br></div>
+  <h5>Nakiwala House - Kansanga Near KIU <br>  0703251153/0776283063</h5>
                        
 	<br>
 
@@ -80,10 +80,10 @@ if(isset($_SESSION['username'])) {
 
 
   <form method="POST" action="save_invoice.php">
-  <table class="table table-bordered table-hover table-print" border="1" cellpadding="4" cellspacing="0" style="font-family: arial; font-size: 12px; text-align: left; width: 40%;">
+  <table class="table table-bordered table-hover table-print"  cellpadding="4" cellspacing="0" style="font-family: arial; font-size: 12  px; text-align: left; width: 40%;">
       <tr>
-       <strong><h3>Receipt Number:<?php echo $invoice_number?></h3></strong> 
-        <?php echo $date?>
+       <strong><h3>Receipt Number:<?php echo $invoice_number?></h3></strong>
+       Print Date: <?php echo $date?>
       </tr>
 		<thead>
 			<tr>
@@ -94,7 +94,7 @@ if(isset($_SESSION['username'])) {
 				<th> Amount </th>
 			</tr>
 		</thead>
-    <tbody><!-- For more projects: Visit codeastro.com  -->
+    <tbody>
       <?php
 
          include("dbcon.php");
@@ -168,7 +168,7 @@ if(isset($_SESSION['username'])) {
           </strong></td>
         </tr>
        
-         <tr>
+         <!-- <tr>
           <td colspan="3" style=" text-align:left;"><strong style="font-size: 18px;">&nbsp;&nbsp;Change Amount: &nbsp;</strong></td>
           <td colspan="2"><strong style="font-size: 12px;">
           <?php
@@ -177,12 +177,13 @@ if(isset($_SESSION['username'])) {
           
           ?>
           </strong></td>
-        </tr>
+        </tr> -->
       
     </tbody>
   </table><br/>
-  <strong style="font-size: 12px;">Printed by: <?php echo $printed_by; ?>&nbsp;, <?php echo date("d-m-Y H:i:s"); ?>
+  <strong style="font-size: 12px;">Printed by: <?php echo $printed_by; ?>&nbsp;, <?php echo date("d-m-Y H:i:s"); ?> For ASK Pharmacy Limited
 </strong>
+
   </div>
 
   <input type="hidden" name="paid_amount" value="<?php echo $paid_amount?>">
@@ -195,5 +196,5 @@ if(isset($_SESSION['username'])) {
   
 
   </body>
-  </html><!-- For more projects: Visit codeastro.com  -->
+  </html>
  

@@ -91,7 +91,7 @@
               <th>Date</th>
               <th>Receipt No.</th>
              <th>Medicines</th>
-             <th>Qty (Type)</th>
+             <!-- <th>Qty (Type)</th> -->
               <th>Total Amount</th>
               <th>Total Profit</th>  
               <th>Action</th>
@@ -119,7 +119,7 @@
                    ?></td>
             
               <td><?php echo $row['medicines']?></td>
-              <td><?php echo $row['quantity']?></td>
+              <!-- <td><?php echo $row['quantity']?></td> -->
               <td><?php echo $row['total_amount']?></td>
               <td><?php echo $row['total_profit']?></td>
                   <td><a href="download.php?invoice_number=<?php echo $invoice_number?>"><button class="btn btn-success btn-md"><span class="icon-download-alt"></span> Download</button></a>
@@ -180,7 +180,8 @@
                    ?></td>
             
              <td><?php echo $row['medicines']?></td>
-             <td><?php echo $row['quantity']?></td>
+             <!-- <td><?php echo $row['quantity']?></td> -->
+             
   
               <td><?php echo $row['total_amount']?></td>
               <td><?php echo $row['total_profit']?></td>
