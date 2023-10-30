@@ -13,6 +13,7 @@
 <html>
 <head>
  <title>Sales Report- Ask</title>
+    <link rel="icon" href="images/oip-p.jpg" type="image/png" sizes="70x70">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
@@ -78,12 +79,7 @@
   </strong>
   </form></center>
   
-  <center>
-    <div class="alert alert-info" role="alert">
-      <small><b>Info:</b> All the downloaded recipts are stored inside the directory " <b>C:/invoices/</b> "</small>
-    </div>
-  <!-- For more projects: Visit codeastro.com  -->
-  </center>
+  
   
               <div style="overflow-x:auto; overflow-y: auto;">
   
@@ -236,4 +232,3 @@
   </body>
 </html>
 <!-- For more projects: Visit codeastro.com  -->
-

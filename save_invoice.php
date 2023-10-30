@@ -157,8 +157,14 @@ if(isset($_POST['submit'])){
   $medicine_name = $_POST['medicine_name'];
 $medicines = implode(",", $medicine_name);
 
-$quantity = $_POST['qty'];
-$qty = implode(",", $quantity);
+if (isset($_POST['qty'])) {
+  $quantity = $_POST['qty'];
+  $qty = implode(",", $quantity);
+} else {
+  // Handle the case where 'qty' is not set in the POST data
+  $qty = ""; // or some default value
+}
+
 
   $qty_type = $qty;
   $filename = "i-" . $invoice_number . ".pdf";
@@ -197,23 +203,22 @@ $qty = implode(",", $quantity);
 		 $total_amount =$row['sum(amount)'];
 		  $total_profit = $row['sum(profit_amount)'];
 	}
+  $user_session = $_SESSION['username'];
+  $insert_sql = "INSERT INTO sales (invoice_number, medicines, quantity, total_amount, total_profit, date,user_session) 
+  VALUES ( '$invoice_number', '$medicines', '$qty_type', '$total_amount', '$total_profit', '$date','$user_session')";
+$insert_query = mysqli_query($con, $insert_sql);
 
-  $insert_sql = "INSERT INTO sales values('','$invoice_number','$medicines','$qty_type','$total_amount','$total_profit','$date')";
-	$insert_query = mysqli_query($con,$insert_sql);
-  if($insert_query){
+if ($insert_query) {
+$update_stock = "UPDATE stock SET act_remain_quantity = '$remain_quantity' WHERE medicine_name = '$med_name' AND category = '$category' AND expire_date = '$expire_date'";
+$update_stock_query = mysqli_query($con, $update_stock);
 
-      $update_stock = "UPDATE stock SET act_remain_quantity = '$remain_quantity' where medicine_name = '$med_name' and category = '$category' and expire_date = '$expire_date'";
-
-      $update_stock_query = mysqli_query($con,$update_stock);
-
-    if($update_stock_query){
-
-      echo "Hello woer";
-    }else{
-
-      echo "Sorry";
-    }
-  }else{
+if ($update_stock_query) {
+echo "Hello world"; // Assuming this is a test message
+} else {
+echo "Sorry, stock update failed";
+}
+} 
+else{
 
     echo "slekfjs";
   }

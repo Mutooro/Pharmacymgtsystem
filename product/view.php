@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <title>SPMS</title>
+ <<title><?php echo isset($_SESSION['username']) ? $_SESSION['username'] : 'My Pharmacy'; ?>- View Stock</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
@@ -182,10 +182,10 @@
              <th  width="1%">Remain Qty</th>
              <th width="1%">Registered</th>
              <th style="background-color: #c53f3f;" width="1%">Expiry</th>
-             <th width="1%">Remark</th>     
+             <th width="1%">Company</th>     
              <th width="2%">Acutal Price</th>
-             <th width="2%">Selling Price</th>
-             <th width="2%">Profit</th>
+             <th width="2%">Retail Price</th>
+             <th width="2%">Wholesale Price</th>
              <th width = "3%">Status</th>
              <th width = "5%">Actions</th>
              </tr>
@@ -193,7 +193,7 @@
             <tbody>
    
         <?php include("../dbcon.php"); ?>
-        <?php $sql = "SELECT  id,bar_code, medicine_name, category, quantity,used_quantity, remain_quantity,act_remain_quantity, register_date, expire_date, company, sell_type , actual_price, selling_price, profit_price, status FROM stock order by id desc"; ?>
+        <?php $sql = "SELECT  id,bar_code, medicine_name, category, quantity,used_quantity, remain_quantity,act_remain_quantity, register_date, expire_date, company, sell_type , actual_price, retail_price, wholesale_price ,  status FROM stock order by id desc"; ?>
         <?php $result =  mysqli_query($con,$sql); ?>
       <!--Use a while loop to make a table row for every DB row-->
         <?php while( $row =  mysqli_fetch_array($result)) : ?>
@@ -211,8 +211,8 @@
             <td><?php echo date("d-m-Y", strtotime($row['expire_date'])); ?></td>
             <td><?php echo $row['company']; ?></td>
             <td><?php echo $row['actual_price']; ?></td>
-            <td><?php echo $row['selling_price']; ?></td>
-            <td><?php echo $row['profit_price']; ?></td>
+            <td><?php echo $row['retail_price']; ?></td>
+            <td><?php echo $row['wholesale_price']; ?></td>
             <td><?php $status = $row['status'];
   
                 if($status == 'Available'){
@@ -344,4 +344,4 @@ $(".delete").click(function(){//***Showing Alert When Deleting*****
 
 
 </script>
-<!-- For more projects: Visit codeastro.com  -->
+

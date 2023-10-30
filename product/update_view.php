@@ -82,7 +82,7 @@ $select_query = mysqli_query($con,$select_sql);
           <td><input type="date" name="exp_date" id="exp_date" size="5" value="<?php echo $row['expire_date']?>"  required></td>
         </tr>
         <tr>
-                   <td>Remark:</td>
+                   <td>Company:</td>
 
           <td><input type="text" name="company" id="company" size="10" value="<?php echo $row['company']?>"></td>
         </tr>

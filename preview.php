@@ -55,7 +55,8 @@ if(!isset($_SESSION['user_session'])){
 
     <div id="content">
 <br>
-	<div style="font:bold 25px 'Arial';">Ask Pharmacy</div>
+	<div style="font:bold 25px 'Arial';">Ask Pharmacy <br></div>
+  <h6>Nakiwala House - Kansanga Near KIU <br>  0703251153/0776283063</h6>
                        
 	<br>
 
@@ -66,8 +67,20 @@ if(!isset($_SESSION['user_session'])){
   $paid_amount   = $_POST['paid_amount'];
 	?>
 
+<?php
+
+
+// Check if the username is set in the session
+if(isset($_SESSION['username'])) {
+    $printed_by = $_SESSION['username']; // Retrieve the username
+} else {
+    $printed_by = "Unknown"; // Default if username is not set
+}
+?>
+
+
   <form method="POST" action="save_invoice.php">
-  <table class="table table-bordered table-hover table-print" border="1" cellpadding="4" cellspacing="0" style="font-family: arial; font-size: 12px; text-align: left; width: 50%;">
+  <table class="table table-bordered table-hover table-print" border="1" cellpadding="4" cellspacing="0" style="font-family: arial; font-size: 12px; text-align: left; width: 40%;">
       <tr>
        <strong><h3>Receipt Number:<?php echo $invoice_number?></h3></strong> 
         <?php echo $date?>
@@ -75,9 +88,9 @@ if(!isset($_SESSION['user_session'])){
 		<thead>
 			<tr>
 				<th> Medicine </th>
-				<th> Category</th>
-				<th> Quantity </th>
+			
 				<th> Price </th>
+        <th>Qty</th>
 				<th> Amount </th>
 			</tr>
 		</thead>
@@ -95,17 +108,25 @@ if(!isset($_SESSION['user_session'])){
         <tr class="record">
         <td><h4><?php echo $row['medicine_name'];?></h4>
           <input type="hidden" name="medicine_name[]" value="<?php echo $row['medicine_name']?>"></td>
-          <input type="hidden" name="ex_date" value="<?php echo $row['expire_date']?>">
-          <input type="hidden" name="ex_date" value="<?php echo $row['category']?>">
-        <td><h5><?php echo $row['category']; ?></h5></td>
-        <td><h5><?php echo $row['qty']." (".$row['type'].")"; ?></h5>
-          <input type="hidden" name="qty[]" value="<?php echo $row['qty']."(".$row['type'].")"; ?>">
-        </td>
+          
+        
+       
         <td>
         <?php
         echo "<h5>".$row['cost']."<h5>";
         ?>
         </td>
+        <td>
+                     <?php
+      
+                        $quantity =  $row['qty'];
+                        $type     =  $row['type'];
+                       ?>
+                       <h4> <?php echo $quantity ; ?></h4>
+                        
+                        
+                                     
+                     </td>
         <td>
         <?php
          echo "<h5>".$row['amount']."<h5>";
@@ -115,7 +136,7 @@ if(!isset($_SESSION['user_session'])){
       <?php endwhile;?>
       <!-- For more projects: Visit codeastro.com  -->
         <tr>
-          <td colspan="4" style=" text-align:right;"><strong style="font-size: 12px;">Total: &nbsp;</strong></td>
+          <td colspan="3" style=" text-align:right;"><strong style="font-size: 12px;">Total: &nbsp;</strong></td>
           <td colspan="2"><strong style="font-size: 12px;">
           <?php
 
@@ -136,8 +157,8 @@ if(!isset($_SESSION['user_session'])){
         </tr>
 
          <tr>
-          <td colspan="4" style=" text-align:left;"><strong style="font-size: 12px;">Paid Amount: &nbsp;</strong></td>
-          <td colspan="2"><strong style="font-size: 12px;">
+          <td colspan="3" style=" text-align:left;"><strong style="font-size: 12px;">Paid Amount: &nbsp;</strong></td>
+          <td colspan="1"><strong style="font-size: 12px;">
           <?php
 
           echo '<h3>'.'ugx.'.$paid_amount.'</h3>';
@@ -148,7 +169,7 @@ if(!isset($_SESSION['user_session'])){
         </tr>
        
          <tr>
-          <td colspan="4" style=" text-align:left;"><strong style="font-size: 18px;">&nbsp;&nbsp;Change Amount: &nbsp;</strong></td>
+          <td colspan="3" style=" text-align:left;"><strong style="font-size: 18px;">&nbsp;&nbsp;Change Amount: &nbsp;</strong></td>
           <td colspan="2"><strong style="font-size: 12px;">
           <?php
 
@@ -160,6 +181,8 @@ if(!isset($_SESSION['user_session'])){
       
     </tbody>
   </table><br/>
+  <strong style="font-size: 12px;">Printed by: <?php echo $printed_by; ?>&nbsp;, <?php echo date("d-m-Y H:i:s"); ?>
+</strong>
   </div>
 
   <input type="hidden" name="paid_amount" value="<?php echo $paid_amount?>">

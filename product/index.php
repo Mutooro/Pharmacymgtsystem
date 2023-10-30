@@ -51,26 +51,34 @@
           <td><input type="date" name="exp_date" id="exp_date" size="5"  required></td>
         </tr>
         <tr>
-                   <td>Remark:</td>
+                   <td>Company:</td>
 
           <td><input type="text" name="company" id="company" size="10"></td>
         </tr>
        
           <tr>
-                     <td>Actual Price:</td>
+                     <td>Buying Price:</td>
 
           <td><input type="number" name="actual_price" id="actual_price"></td>
         </tr>
         <tr>
-                   <td>Selling Price:</td>
+   <td>Retail Price:</td>
+   <td><input type="number" name="retail_price" id="retail_price"></td>
+</tr>
+<tr>
+   <td>Wholesale Price:</td>
+   <td><input type="number" name="wholesale_price" id="wholesale_price"></td>
+</tr>
 
-          <td><input type="number" name="selling_price" id="selling_price"></td>
-        </tr>
-        <tr><!-- For more projects: Visit codeastro.com  -->
-                   <td>Profit:</td>
+<tr>
+   <td>Wholesale Profit:</td>
+   <td><input type="text" name="wholesale_profit" id="wholesale_profit" readonly></td>
+</tr>
+<tr>
+   <td>Retail Profit:</td>
+   <td><input type="text" name="retail_profit" id="retail_profit" readonly></td>
+</tr>
 
-          <td><input type="text" name="profit_price" id="profit_price"></td>
-        </tr>
 
         <tr>
           <td></td>
@@ -125,6 +133,40 @@
 	var output = pro_price.toString().concat("(")+percentage.toString().concat("%)");
         $("#profit_price").val(output);
             });
+          
+            $(document).on('keyup', '#actual_price, #retail_price, #wholesale_price', function(){
+   var actual_price = $("#actual_price").val();
+   var retail_price = $("#retail_price").val();
+   var wholesale_price = $("#wholesale_price").val();
+
+   // Calculate and populate retail profit
+   if (retail_price) {
+       var retail_profit = parseInt(retail_price) - parseInt(actual_price);
+       $("#retail_profit").val(retail_profit);
+
+       var retail_profit_percentage = ((retail_profit / actual_price) * 100).toFixed(2);
+       $("#retail_profit_percentage").val(retail_profit_percentage + "%");
+   } else {
+       $("#retail_profit").val('');
+       $("#retail_profit_percentage").val('');
+   }
+
+   // Calculate and populate wholesale profit
+   if (wholesale_price) {
+       var wholesale_profit = parseInt(wholesale_price) - parseInt(actual_price);
+       $("#wholesale_profit").val(wholesale_profit);
+
+       var wholesale_profit_percentage = ((wholesale_profit / actual_price) * 100).toFixed(2);
+       $("#wholesale_profit_percentage").val(wholesale_profit_percentage + "%");
+   } else {
+       $("#wholesale_profit").val('');
+       $("#wholesale_profit_percentage").val('');
+   }
+});
+
+
+
+
 });
   	
   </script>

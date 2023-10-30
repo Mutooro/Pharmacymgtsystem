@@ -56,7 +56,9 @@ $select_query= mysqli_query($con,$select_sql);
 	$amount = $qty*$cost;
 	$profit_amt = $profit*$qty;
 
-               $insert_sql ="INSERT INTO on_hold values('','$invoice_number','$medicine_name','$category','$expire_date','$qty','$sell_type','$cost','$amount','$profit_amt','$date')";//*****INSERTING INTO on_HOLD TABLE*******
+	$user_session = $_SESSION['username']; // Replace 'user_session' with your actual session variable name
+	$insert_sql = "INSERT INTO on_hold VALUES('',  '$invoice_number', '$medicine_name', '$category', '$expire_date', '$qty', '$sell_type', '$cost', '$amount', '$profit_amt', '$date','$user_session')";
+	
 
 	$insert_query = mysqli_query($con,$insert_sql);
 
@@ -70,5 +72,6 @@ $select_query= mysqli_query($con,$select_sql);
 	}
 
   }
+  
 
 ?>

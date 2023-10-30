@@ -39,7 +39,7 @@ if(!isset($_SESSION['user_session'])){
 <body>
 
 	   <div class="expire" color="green" >
-    	  <font size="5">Medicine Going to Expire</font><br><hr>
+    	  <font size="5" color="red">Medicine Going to Expire</font><br><hr>
     	  <input type="text"  id="name_med" size="4"  onkeyup="med_name()" placeholder="Search for Medicine names.." title="Type in a name">
  <div style="overflow-x:auto; overflow-y: auto; height: 230px;">
  

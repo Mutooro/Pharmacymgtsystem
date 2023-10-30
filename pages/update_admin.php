@@ -22,13 +22,13 @@ if (isset($_POST['submit'])) {
 	$user = $_POST['user'];
   
 	// Retrieve data from database
-	$sql = "UPDATE pharmacist SET first_name='$fname', last_name='$lname', staff_id='$sid',
+	$sql = "UPDATE admin SET first_name='$fname', last_name='$lname', staff_id='$sid',
   postal_address='$postal', phone='$phone', email='$email', username='$username', password='$hashed_password' WHERE username='$username'";
   
 	// You should execute the SQL query here using mysqli_query()
   
 	if ($sql) {
-	  header("location:http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/admin_pharmacist.php");
+	  header("location:http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/admin_add.php");
 	} else {
 	  $message1 = "<font color=red>Update Failed, Try again</font>";
 	}
