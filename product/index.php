@@ -1,4 +1,4 @@
-<!-- For more projects: Visit codeastro.com  -->
+
 <?php
  
     session_start();
@@ -13,8 +13,8 @@
  	 	<form method="POST" action="register.php?invoice_number=<?php echo $_GET['invoice_number']?>">
   	  	  <table id="table" style="width: 400px; margin: auto;overflow-x:auto; overflow-y: auto;">
   	  	 <tr>
-         <td>Bar Code:</td>
-         <td><input type="text" name="bar_code" id="bar_code" size="10" placeholder="Set a bar code" required></td>
+         <td>Batch No:</td>
+         <td><input type="text" name="bar_code" id="bar_code" size="10" placeholder="Enter Batch Number" required></td>
           </tr>
           <tr id="row1">
          <td>Medicine Name:</td>
@@ -31,11 +31,11 @@
         <td><input type="number" style="width: 95px;" name="quantity">
 
              <select style="width: 95px; height: 28px; border-color: #000080" name="sell_type" > 
-                 <option value="Bot">Bot</option>
+                 <!-- <option value="Bot">Bot</option> -->
                  <option value="Stp">Stp</option>
                   <option value="Tab">Tab</option>
-		 <option value="Sachet">Sachet</option>	
-		<option value="Unit">Unit</option>
+		 <option value="Sachet">Pachet</option>	
+		<!-- <option value="Unit">Unit</option> -->
 		<option value="Tube">Tube</option>
                  </select></td>
         
@@ -53,7 +53,7 @@
         <tr>
                    <td>Company:</td>
 
-          <td><input type="text" name="company" id="company" size="10"></td>
+          <td><input type="text" name="company" id="company" placeholder="Enter manufacturer" size="10"></td>
         </tr>
        
           <tr>
@@ -70,15 +70,13 @@
    <td><input type="number" name="wholesale_price" id="wholesale_price"></td>
 </tr>
 
-<tr>
-   <td>Wholesale Profit:</td>
-   <td><input type="text" name="wholesale_profit" id="wholesale_profit" readonly></td>
-</tr>
-<tr>
-   <td>Retail Profit:</td>
-   <td><input type="text" name="retail_profit" id="retail_profit" readonly></td>
-</tr>
+          <td><input type="number" name="selling_price" id="selling_price"></td>
+        </tr>
+        <tr><!-- For more projects: Visit codeastro.com  -->
+                   <td>Profit:</td>
 
+          <td><input type="text" name="profit_price" id="profit_price" readonly></td>
+        </tr>
 
         <tr>
           <td></td>

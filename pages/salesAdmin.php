@@ -13,6 +13,7 @@
 <html>
 <head>
  <title>Sales Report- Ask</title>
+ <link rel="icon" href="oip-p.jpg" type="image/png" sizes="70x70">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -111,7 +112,7 @@ window.onload=startclock;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#" style="color:#FFFFFF;">Ask Pharmacy</a>
+      <a class="navbar-brand" href="#" style="color:#FFFFFF;">Ask Pharmacy Limited</a>
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
@@ -235,13 +236,7 @@ $summary_query = mysqli_query($con, $summary_sql);
 </div>
 
   
-  <center>
-    <div class="alert alert-info" role="alert">
-      <small><b>Info:</b> All the downloaded receipts are stored inside the directory " <b>C:/invoices/</b> "</small>
-    </div>
-  <!-- For more projects: Visit codeastro.com  -->
-  </center>
-  
+
               <div style="overflow-x:auto; overflow-y: auto;">
   
   

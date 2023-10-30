@@ -18,7 +18,7 @@
   <span class="icon-bar"></span>
     </a>
 
-    <a class="brand" href="#"><b>Ask Pharmacy </b></a>
+    <a class="brand" href="#"><b>Ask Pharmacy Limited</b></a>
 
     <div class="nav-collapse">
       <ul class="nav pull-right">

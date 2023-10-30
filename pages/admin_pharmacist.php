@@ -50,6 +50,7 @@ if(isset($_POST['submit'])){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php echo $username;?>My pharmacy</title>
+  <link rel="icon" href="oip-p.jpg" type="image/png" sizes="70x70">
   <!-- Link to Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="style/mystyle.css">
@@ -137,7 +138,8 @@ return false;
 <body>
   <!-- Navigation Bar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">Ask Pharmacy  </a>
+    <a class="navbar-brand" href="#">Ask Pharmacy Limited </a>
+    
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -190,7 +192,7 @@ return false;
        $result = mysqli_query($con, "SELECT * FROM pharmacist")or die(mysqli_error($con));
 		// display data in table
         echo "<table border='1' cellpadding='5'align='center'>";
-        echo "<tr> <th>Firstname </th> <th>Lastname </th><th>Gender </th><th>Designation </th><th>Phone </th><th>Address </th><th>Username </th><th>Update </th><th>Delete</th></tr>";
+        echo "<tr> <th>Firstname </th> <th>Lastname </th><th>Gender </th><th>Designation </th><th>Phone </th><th>Address </th><th>Username </th><th>Delete</th></tr>";
         // loop through results of database query, displaying them in the table
         while($row = mysqli_fetch_array( $result )) {
                 // echo out the contents of each row into a table
@@ -205,7 +207,7 @@ return false;
         echo '<td>' . $row['postal_address'] . '</td>';
 				echo '<td>' . $row['username'] . '</td>';
 				?>
-				<td><a href="update_pharmacist.php?username=<?php echo $row['username']?>"><img src="images/update-icon.png" width="35" height="35" border="0" /></a></td>
+				<!-- <td><a href="update_pharmacist.php?username=<?php echo $row['username']?>"><img src="images/update-icon.png" width="35" height="35" border="0" /></a></td> -->
 				<td><a href="delete_pharmacist.php?pharmacist_id=<?php echo $row['pharmacist_id']?>"><img src="images/delete-icon.jpg" width="35" height="35" border="0" /></a></td>
 				<?php
 		 }
@@ -240,7 +242,7 @@ return false;
                 Role:
                 <select name="role" required>
                     <option value="Nurse">Nurse</option>
-                    <option value="Marketer">Marketer</option>
+                    <option value="Marketier">Marketier</option>
                     <option value="Pharmacist">Pharmacist</option>
                 </select>
             </td>

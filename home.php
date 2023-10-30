@@ -13,6 +13,7 @@ if(!isset($_SESSION['user_session'])){  //User_session
 <html>
 <head>
   <title>Ask Pharmacy || home</title>
+  <link rel="icon" href="images/oip-p.jpg" type="image/png" sizes="70x70">
    <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
@@ -197,7 +198,7 @@ window.onload=startclock;
 
 </head>
 <body>
-<div class="navbar navbar-inverse navbar-fixed-top"><!-- *****Header ***** -->
+ <div class="navbar navbar-inverse navbar-fixed-top"><!-- *****Header ***** -->
 
 <div class="navbar-inner">
   <div class="container-fluid">
@@ -208,7 +209,7 @@ window.onload=startclock;
       <span class="icon-bar"></span>
     </a>
 
-    <a class="brand" href="#"><b>Ask Pharmacy</b></a>
+    <a class="brand" href="#"><b>Ask Pharmacy Limited</b></a>
     <div class="nav-collapse collapse">
 
       <ul class="nav pull-right">
@@ -266,7 +267,7 @@ include("dbcon.php");
         <li><a href="backup.php?invoice_number=<?php echo $_GET['invoice_number']?>"><span class="icon-folder-open"></span> Backup</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <span class="fa fa-user" aria-hidden="true"> <?php echo $_SESSION['first_name']?></span>
+            <span class="fa fa-user" aria-hidden="true"> <?php echo $_SESSION['username']?></span>
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
@@ -281,14 +282,14 @@ include("dbcon.php");
 </div>
 </div>
 <!--*****Header******-->
-
  
  <div class="container">
 
     <div class="row">
       <div class="pull-right">
         <font>Today's Sales:</font>
-        <strong><?php
+                  
+                  <strong><?php
 include("dbcon.php");
 
 $date = date("Y-m-d");
@@ -302,7 +303,6 @@ while ($row = mysqli_fetch_array($select_query)) {
     echo 'shs.' . $row['SUM(total_amount)'];
 }
 ?></strong>
- 
         </div>
       <i class="icon-calendar icon-large"></i>
                 <?php

@@ -158,8 +158,8 @@ echo <<<LOGIN
                 <i class="fas fa-users"></i>
                 <select name="position" id="role" required>
                 <option>--Select Role--</option>
-        			<option>Admin</option>
-        			<option>Pharmacist</option>
+                    <option>Admin</option>
+                    <option>Pharmacist</option>
                 </select>
             </label>
             <input type="submit" value="Login" name="submit">

@@ -195,14 +195,14 @@ if (isset($_POST['qty'])) {
 
   $remain_quantity = $row['remain_quantity'];
 
-	$select_sql = "SELECT invoice_number ,sum(amount) ,sum(profit_amount) FROM on_hold where invoice_number = '$invoice_number'";
-	$select_query  = mysqli_query($con,$select_sql);
+  $select_sql = "SELECT invoice_number ,sum(amount) ,sum(profit_amount) FROM on_hold where invoice_number = '$invoice_number'";
+  $select_query  = mysqli_query($con,$select_sql);
 
-	while ($row = mysqli_fetch_array($select_query)) {
+  while ($row = mysqli_fetch_array($select_query)) {
      $on_hold_invoice=$row['invoice_number'];
-		 $total_amount =$row['sum(amount)'];
-		  $total_profit = $row['sum(profit_amount)'];
-	}
+     $total_amount =$row['sum(amount)'];
+      $total_profit = $row['sum(profit_amount)'];
+  }
   $user_session = $_SESSION['username'];
   $insert_sql = "INSERT INTO sales (invoice_number, medicines, quantity, total_amount, total_profit, date,user_session) 
   VALUES ( '$invoice_number', '$medicines', '$qty_type', '$total_amount', '$total_profit', '$date','$user_session')";
