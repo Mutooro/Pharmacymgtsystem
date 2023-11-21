@@ -94,7 +94,7 @@
              <!-- <th>Qty (Type)</th> -->
               <th>Total Amount</th>
               <th>Total Profit</th>  
-              <th>Action</th>
+              <!-- <th>Action</th> -->
             <!--  <th>Action</th>-->
             </tr></thead>
   
@@ -122,7 +122,7 @@
               <!-- <td><?php echo $row['quantity']?></td> -->
               <td><?php echo $row['total_amount']?></td>
               <td><?php echo $row['total_profit']?></td>
-                  <td><a href="download.php?invoice_number=<?php echo $invoice_number?>"><button class="btn btn-success btn-md"><span class="icon-download-alt"></span> Download</button></a>
+                
                </td>
   
                                        <?php endwhile;?>
@@ -130,7 +130,7 @@
             </tr>
             </tbody>
   
-            <th colspan="4">Total:</th>
+            <th colspan="3">Total:</th>
                 <th>
                   <?php
   
@@ -185,14 +185,14 @@
   
               <td><?php echo $row['total_amount']?></td>
               <td><?php echo $row['total_profit']?></td>
-              <td><a href="download.php?invoice_number=<?php echo $invoice_number?>"><button class="btn btn-success btn-md"><span class="icon-download-alt"></span> Download</button></a>
+              <!-- <td><a href="download.php?invoice_number=<?php echo $invoice_number?>"><button class="btn btn-success btn-md"><span class="icon-download-alt"></span> Download</button></a> -->
           </td>
          <?php endwhile;?>
   
             </tr>
             </tbody>
   
-             <th colspan="4">Total:</th>
+             <th colspan="3">Total:</th>
                 <th>
                   <?php
   
@@ -222,10 +222,16 @@
                   ?>
   
                             <?php } ?>
+                            
                 </th>
   
         </table>
-       
+        <a href="download_sales_report.php?date=<?php echo $date; ?>">
+    <button class="btn btn-primary">
+        <span class="icon-download-alt"></span> Download Sales Report
+    </button>
+</a>
+
         
       </div>
     </div>
