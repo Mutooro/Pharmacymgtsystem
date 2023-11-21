@@ -80,7 +80,7 @@ if(isset($_SESSION['username'])) {
 
 
   <form method="POST" action="save_invoice.php">
-  <table class="table table-bordered table-hover table-print"  cellpadding="4" cellspacing="0" style="font-family: arial; font-size: 12  px; text-align: left; width: 40%;">
+  <table class="table table-bordered table-hover" border="1" cellpadding="4" cellspacing="0" style="font-family: arial; font-size: 12  px; text-align: left; width: 40%;">
       <tr>
        <strong><h3>Receipt Number:<?php echo $invoice_number?></h3></strong>
        Print Date: <?php echo $date?>
@@ -181,7 +181,7 @@ if(isset($_SESSION['username'])) {
       
     </tbody>
   </table><br/>
-  <strong style="font-size: 12px;">Printed by: <?php echo $printed_by; ?>&nbsp;, <?php echo date("d-m-Y H:i:s"); ?> For ASK Pharmacy Limited
+  <strong style="font-size: 12px;">Printed by: <?php echo $printed_by; ?>&nbsp;, <?php echo date("d-m-Y H:i:s"); ?>
 </strong>
 
   </div>

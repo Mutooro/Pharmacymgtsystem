@@ -144,27 +144,37 @@ echo <<<LOGIN
         <h1>Login</h1>
         $message
         <form action="" method="post">
-            <!-- Your form elements here -->
-            <label for="username">
-                <i class="fas fa-user"></i>
-                <input type="text" name="username" placeholder="Username" id="username" required>
-            </label>
-            <label for="password">
-                <i class="fas fa-lock"></i>
-                <input type="password" name="password" placeholder="Password" id="password" required>
-            </label>
-           
-            <label for="role">
-                <i class="fas fa-users"></i>
-                <select name="position" id="role" required>
-                <option>--Select Role--</option>
-                    <option>Admin</option>
-                    <option>Pharmacist</option>
-                </select>
-            </label>
-            <input type="submit" value="Login" name="submit">
+    <!-- Your form elements here -->
+    <label for="username">
+        <i class="fas fa-user"></i>
+        <input type="text" name="username" placeholder="Username" id="username" required>
+    </label>
+    <label for="password">
+        <i class="fas fa-lock"></i>
+        <input type="password" name="password" placeholder="Password" id="password" required>
+        <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+    </label>
+   
+    <label for="role">
+        <i class="fas fa-users"></i>
+        <select name="position" id="role" required>
+            <option>--Select Role--</option>
+            <option>Admin</option>
+            <option>Pharmacist</option>
+        </select>
+    </label>
+    <input type="submit" value="Login" name="submit">
+</form>
 
-        </form>
+<script>
+    document.querySelector('.toggle-password').addEventListener('click', function () {
+        const passwordInput = document.querySelector('#password');
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>
+
         <center><div class="footer" ><hr>
         <p>&copy; $date Ask Pharmacy Limited. All rights reserved.</p>
     </div></center>
